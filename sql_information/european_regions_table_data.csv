@@ -1,0 +1,513 @@
+idEuropeanRegion,Name,Type,Country,OtherRegion,idCountry,idTerritory
+1,Andreas,Parish,"Isle of Man",NULL,NULL,29
+2,"Arbory and Rushen",Parish,"Isle of Man","["Arbrory", "Rushen"]",NULL,29
+3,Ballaugh,Parish,"Isle of Man",NULL,NULL,29
+4,Braddan,Parish,"Isle of Man",NULL,NULL,29
+5,Bride,Parish,"Isle of Man",NULL,NULL,29
+6,Castletown,Town,"Isle of Man",NULL,NULL,29
+7,Douglas,Town,"Isle of Man",NULL,NULL,29
+8,Garff,Parish,"Isle of Man","["Laxey", "Lonan", "Maughold"]",NULL,29
+9,German,Parish,"Isle of Man",NULL,NULL,29
+10,Jurby,Parish,"Isle of Man",NULL,NULL,29
+11,Lezayre,Parish,"Isle of Man",NULL,NULL,29
+12,Malew,Parish,"Isle of Man",NULL,NULL,29
+13,Marown,Parish,"Isle of Man",NULL,NULL,29
+14,Michael,District,"Isle of Man",NULL,NULL,29
+15,Onchan,District,"Isle of Man",NULL,NULL,29
+16,Patrick,Parish,"Isle of Man",NULL,NULL,29
+17,Peel,Town,"Isle of Man",NULL,NULL,29
+18,"Port Erin",Village,"Isle of Man",NULL,NULL,29
+19,"Port Saint Mary",Village,"Isle of Man",NULL,NULL,29
+20,Ramsey,Town,"Isle of Man",NULL,NULL,29
+21,Santon,Parish,"Isle of Man",NULL,NULL,29
+22,"Bath and North East Somerset","Unitary Authority",England,"["Somerset"]",186,NULL
+23,Bedford,"Unitary Authority",England,"["Bedfordshire"]",186,NULL
+24,"Blackburn with Darwen","Unitary Authority",England,"["Lancashire"]",186,NULL
+25,Blackpool,"Unitary Authority",England,"["Lancashire"]",186,NULL
+26,"Bournemouth, Christchurch and Poole","Unitary Authority",England,"["Dorset"]",186,NULL
+27,"Bracknell Forest","Unitary Authority",England,"["Berkshire"]",186,NULL
+28,"Brighton and Hove","Unitary Authority",England,"["East Sussex"]",186,NULL
+29,Bristol,"County and Unitary Authority",England,"["Bristol"]",186,NULL
+30,Buckinghamshire,"Unitary Authority",England,"["Buckinghamshire"]",186,NULL
+31,Cambridgeshire,County,England,"["Cambridgeshire"]",186,NULL
+32,"Central Bedfordshire","Unitary Authority",England,"["Bedfordshire"]",186,NULL
+33,"Cheshire East","Unitary Authority",England,"["Cheshire"]",186,NULL
+34,"Cheshire West and Chester","Unitary Authority",England,"["Cheshire"]",186,NULL
+35,"City of London",County,England,"["City of London"]",186,NULL
+36,Cornwall,"Unitary Authority",England,"["Cornwall"]",186,NULL
+37,"County Durham","Unitary Authority",England,"["Durham"]",186,NULL
+38,Cumberland,"Unitary Authority",England,"["Cumbria"]",186,NULL
+39,Darlington,"Unitary Authority",England,"["Durham"]",186,NULL
+40,Derby,"Unitary Authority",England,"["Derbyshire"]",186,NULL
+41,Derbyshire,County,England,"["Derbyshire"]",186,NULL
+42,Devon,County,England,"["Devon"]",186,NULL
+43,Dorset,County,England,"["Dorset"]",186,NULL
+44,"East Riding of Yorkshire","Unitary Authority",England,"["East Riding of Yorkshire"]",186,NULL
+45,"East Sussex",County,England,"["East Sussex"]",186,NULL
+46,Essex,County,England,"["Essex"]",186,NULL
+47,Gloucestershire,County,England,"["Gloucestershire"]",186,NULL
+48,"Greater London",County,England,"["Greater London"]",186,NULL
+49,"Greater Manchester",County,England,"["Greater London"]",186,NULL
+50,Halton,"Unitary Authority",England,"["Cheshire"]",186,NULL
+51,Hampshire,County,England,"["Hampshire"]",186,NULL
+52,Hartlepool,"Unitary Authority",England,"["Durham"]",186,NULL
+53,Herefordshire,"County and Unitary Authority",England,"["Herefordshire"]",186,NULL
+54,Hertfordshire,County,England,"["Hertfordshire"]",186,NULL
+55,"Isle of Wight","County and Unitary Authority",England,"["Isle of Wight"]",186,NULL
+56,"Isles of Scilly","Sui Generis Unitary Authority",England,"["Cornwall"]",186,NULL
+57,Kent,County,England,"["Kent"]",186,NULL
+58,"Kingston upon Hull","Unitary Authority",England,"["East Riding of Yorkshire"]",186,NULL
+59,Lancashire,County,England,"["Lancashire"]",186,NULL
+60,Leicester,"Unitary Authority",England,"["Leicestershire"]",186,NULL
+61,Leicestershire,County,England,"["Leicestershire"]",186,NULL
+62,Lincolnshire,County,England,"["Lincolnshire"]",186,NULL
+63,Luton,"Unitary Authority",England,"["Bedfordshire"]",186,NULL
+64,Medway,"Unitary Authority",England,"["Kent"]",186,NULL
+65,Merseyside,County,England,"["Merseyside"]",186,NULL
+66,Middlesbrough,"Unitary Authority",England,"["North Yorkshire"]",186,NULL
+67,"Milton Keynes","Unitary Authority",England,"["Buckinghamshire"]",186,NULL
+68,Norfolk,County,England,"["Norfolk"]",186,NULL
+69,"North East Lincolnshire","Unitary Authority",England,"["Lincolnshire"]",186,NULL
+70,"North Lincolnshire","Unitary Authority",England,"["Lincolnshire"]",186,NULL
+71,"North Northamptonshire","Unitary Authority",England,"["Northamptonshire"]",186,NULL
+72,"North Somerset","Unitary Authority",England,"["Somerset"]",186,NULL
+73,"North Yorkshire","Unitary Authority",England,"["North Yorkshire"]",186,NULL
+74,Northumberland,"County and Unitary Authority",England,"["Northumberland"]",186,NULL
+75,Nottingham,"Unitary Authority",England,"["Nottinghamshire"]",186,NULL
+76,Nottinghamshire,County,England,"["Nottinghamshire"]",186,NULL
+77,Oxfordshire,County,England,"["Oxfordshire"]",186,NULL
+78,Peterborough,"Unitary Authority",England,"["Cambridgeshire"]",186,NULL
+79,Plymouth,"Unitary Authority",England,"["Devon"]",186,NULL
+80,Portsmouth,"Unitary Authority",England,"["Hampshire"]",186,NULL
+81,"Redcar and Cleveland","Unitary Authority",England,"["North Yorkshire"]",186,NULL
+82,Reading,"Unitary Authority",England,"["Berkshire"]",186,NULL
+83,Rutland,"County and Unitary Authority",England,"["Rutland"]",186,NULL
+84,Shropshire,"Unitary Authority",England,"["Shropshire"]",186,NULL
+85,Slough,"Unitary Authority",England,"["Berkshire"]",186,NULL
+86,Somerset,"Unitary Authority",England,"["Somerset"]",186,NULL
+87,"South Gloucestershire","Unitary Authority",England,"["Gloucestershire"]",186,NULL
+88,"South Yorkshire",County,England,"["South Yorkshire"]",186,NULL
+89,Southend-on-Sea,"Unitary Authority",England,"["Essex"]",186,NULL
+90,Southampton,"Unitary Authority",England,"["Hampshire"]",186,NULL
+91,Staffordshire,County,England,"["Staffordshire"]",186,NULL
+92,Stockton-on-Tees,"Unitary Authority",England,"["Durham", "North Yorkshire"]",186,NULL
+93,Stoke-on-Trent,"Unitary Authority",England,"["Staffordshire"]",186,NULL
+94,Suffolk,County,England,"["Suffolk"]",186,NULL
+95,Surrey,County,England,"["Surrey"]",186,NULL
+96,Swindon,"Unitary Authority",England,"["Wiltshire"]",186,NULL
+97,"Telford and Wrekin","Unitary Authority",England,"["Shropshire"]",186,NULL
+98,Thurrock,"Unitary Authority",England,"["Essex"]",186,NULL
+99,Torbay,"Unitary Authority",England,"["Devon"]",186,NULL
+100,"Tyne and Wear",County,England,"["Tyne and Wear"]",186,NULL
+101,Warrington,"Unitary Authority",England,"["Cheshire"]",186,NULL
+102,Warwickshire,County,England,"["Warwickshire"]",186,NULL
+103,"West Berkshire","Unitary Authority",England,"["Berkshire"]",186,NULL
+104,"West Midlands",County,England,"["West Midlands"]",186,NULL
+105,"West Northamptonshire","Unitary Authority",England,"["Northamptonshire"]",186,NULL
+106,"West Sussex",County,England,"["West Sussex"]",186,NULL
+107,"West Yorkshire",County,England,"["West Yorkshire"]",186,NULL
+108,"Westmorland and Furness","Unitary Authority",England,"["Cumbria"]",186,NULL
+109,Wiltshire,"Unitary Authority",England,"["Wiltshire"]",186,NULL
+110,"Windsor and Maidenhead","Unitary Authority",England,"["Berkshire"]",186,NULL
+111,Wokingham,"Unitary Authority",England,"["Berkshire"]",186,NULL
+112,Worcestershire,County,England,"["Worcestershire"]",186,NULL
+113,York,"Unitary Authority",England,"["North Yorkshire"]",186,NULL
+114,"Aberdeen City","Council Area",Scotland,"["Aberdeenshire"]",186,NULL
+115,Aberdeenshire,"Council Area",Scotland,"["Aberdeenshire", "Banffshire", "Kincardineshire"]",186,NULL
+116,Angus,"Council Area",Scotland,"["Angus"]",186,NULL
+117,"Argyll and Bute","Council Area",Scotland,"["Argyll", "Buteshire", "Dunbartonshire"]",186,NULL
+118,Clackmannanshire,"Council Area",Scotland,"["Clackmannanshire"]",186,NULL
+119,"Dumfries and Galloway","Council Area",Scotland,"["Dumfriesshire", "Kirkcudbrightshire", "Wigtownshire"]",186,NULL
+120,"Dundee City","Council Area",Scotland,"["Angus"]",186,NULL
+121,"East Ayrshire","Council Area",Scotland,"["Ayrshire"]",186,NULL
+122,"East Dunbartonshire","Council Area",Scotland,"["Dunbartonshire", "Lanarkshire", "Stirlingshire"]",186,NULL
+123,"East Lothian","Council Area",Scotland,"["East Lothian", "Midlothian"]",186,NULL
+124,"East Renfrewshire","Council Area",Scotland,"["Renfrewshire"]",186,NULL
+125,"City of Edinburgh","Council Area",Scotland,"["Midlothian", "West Lothian"]",186,NULL
+126,Falkirk,"Council Area",Scotland,"["Stirlingshire", "West Lothian"]",186,NULL
+127,Fife,"Council Area",Scotland,"["Fife"]",186,NULL
+128,"Glasgow City","Council Area",Scotland,"["Lanarkshire"]",186,NULL
+129,Highland,"Council Area",Scotland,"["Argyll", "Caithness", "Inverness-shire", "Moray", "Nairnshire", "Ross and Cromarty", "Sutherland"]",186,NULL
+130,Inverclyde,"Council Area",Scotland,"["Renfrewshire"]",186,NULL
+131,Moray,"Council Area",Scotland,"["Banffshire", "Moray"]",186,NULL
+132,Midlothian,"Council Area",Scotland,"["Midlothian"]",186,NULL
+133,"North Ayrshire","Council Area",Scotland,"["Ayrshire", "Buteshire"]",186,NULL
+134,"North Lanarkshire","Council Area",Scotland,"["Dunbartonshire", "Lanarkshire", "Stirlingshire"]",186,NULL
+135,"Orkney Islands","Council Area",Scotland,"["Orkney"]",186,NULL
+136,"Na h-Eileanan Siar","Council Area",Scotland,"["Inverness-shire", "Ross and Cromarty"]",186,NULL
+137,"Perth and Kinross","Council Area",Scotland,"["Kinross-shire", "Perthshire"]",186,NULL
+138,Renfrewshire,"Council Area",Scotland,"["Renfrewshire"]",186,NULL
+139,"Scottish Borders","Council Area",Scotland,"["Berwickshire", "East Lothian", "Midlothian", "Peebles", "Roxburghshire", "Selkirkshire"]",186,NULL
+140,"Shetland Islands","Council Area",Scotland,"["Zetland"]",186,NULL
+141,"South Ayrshire","Council Area",Scotland,"["Ayrshire"]",186,NULL
+142,"South Lanarkshire","Council Area",Scotland,"["Lanarkshire"]",186,NULL
+143,Stirling,"Council Area",Scotland,"["Perthshire", "Stirlingshire"]",186,NULL
+144,"West Dunbartonshire","Council Area",Scotland,"["Dunbartonshire"]",186,NULL
+145,"West Lothian","Council Area",Scotland,"["Midlothian", "West Lothian"]",186,NULL
+146,"Blaenau Gwent","County Borough",Wales,"["Gwent"]",186,NULL
+147,Bridgend,"County Borough",Wales,"["Mid Glamorgan"]",186,NULL
+148,Caerphilly,"County Borough",Wales,"["Gwent"]",186,NULL
+149,Cardiff,County,Wales,"["South Glamorgan"]",186,NULL
+150,Carmarthenshire,County,Wales,"["Dyfed"]",186,NULL
+151,Ceredigion,County,Wales,"["Dyfed"]",186,NULL
+152,Conwy,"County Borough",Wales,"["Clwyd"]",186,NULL
+153,Denbighshire,County,Wales,"["Clwyd"]",186,NULL
+154,Flintshire,County,Wales,"["Clwyd"]",186,NULL
+155,"Isle of Anglesey",County,Wales,"["Gwynedd"]",186,NULL
+156,"Merthyr Tydfil","County Borough",Wales,"["Mid Glamorgan"]",186,NULL
+157,Monmouthshire,County,Wales,"["Gwent"]",186,NULL
+158,"Neath Port Talbot","County Borough",Wales,"["West Glamorgan"]",186,NULL
+159,Newport,"County Borough",Wales,"["Gwent"]",186,NULL
+160,Pembrokeshire,County,Wales,"["Dyfed"]",186,NULL
+161,Powys,County,Wales,"["Powys"]",186,NULL
+162,"Rhondda Cynon Taf","County Borough",Wales,"["Mid Glamorgan"]",186,NULL
+163,Swansea,County,Wales,"["West Glamorgan"]",186,NULL
+164,Torfaen,"County Borough",Wales,"["Gwent"]",186,NULL
+165,"Vale of Glamorgan","County Borough",Wales,"["South Glamorgan"]",186,NULL
+166,Wrexham,"County Borough",Wales,"["Clwyd"]",186,NULL
+167,Carlow,County,Ireland,NULL,80,NULL
+168,Cavan,County,Ireland,NULL,80,NULL
+169,Clare,County,Ireland,NULL,80,NULL
+170,Cork,County,Ireland,NULL,80,NULL
+171,Donegal,County,Ireland,NULL,80,NULL
+172,Dublin,County,Ireland,NULL,80,NULL
+173,Galway,County,Ireland,NULL,80,NULL
+174,Kerry,County,Ireland,NULL,80,NULL
+175,Kildare,County,Ireland,NULL,80,NULL
+176,Kilkenny,County,Ireland,NULL,80,NULL
+177,Laois,County,Ireland,NULL,80,NULL
+178,Leitrim,County,Ireland,NULL,80,NULL
+179,Limerick,County,Ireland,NULL,80,NULL
+180,Longford,County,Ireland,NULL,80,NULL
+181,Louth,County,Ireland,NULL,80,NULL
+182,Mayo,County,Ireland,NULL,80,NULL
+183,Meath,County,Ireland,NULL,80,NULL
+184,Monaghan,County,Ireland,NULL,80,NULL
+185,Offaly,County,Ireland,NULL,80,NULL
+186,Roscommon,County,Ireland,NULL,80,NULL
+187,Sligo,County,Ireland,NULL,80,NULL
+188,Tipperary,County,Ireland,NULL,80,NULL
+189,Waterford,County,Ireland,NULL,80,NULL
+190,Westmeath,County,Ireland,NULL,80,NULL
+191,Wexford,County,Ireland,NULL,80,NULL
+192,Wicklow,County,Ireland,NULL,80,NULL
+193,"Antrim and Newtownabbey",District,"Northern Ireland","["Antrim"]",186,NULL
+194,"Ards and North Down",District,"Northern Ireland","["Down"]",186,NULL
+195,"Armagh City, Banbridge and Craigavon",District,"Northern Ireland","["Armagh", "Down"]",186,NULL
+196,Belfast,District,"Northern Ireland","["Antrim"]",186,NULL
+197,"Causeway Coast and Glens",District,"Northern Ireland","["Antrim", "Derry"]",186,NULL
+198,"Derry City and Strabane",District,"Northern Ireland","["Derry", "Tyrone"]",186,NULL
+199,"Fermanagh and Omagh",District,"Northern Ireland","["Fermanagh", "Tyrone"]",186,NULL
+200,"Lisburn and Castlereagh",District,"Northern Ireland","["Antrim", "Down"]",186,NULL
+201,"Mid and East Antrim",District,"Northern Ireland","["Antrim"]",186,NULL
+202,"Mid Ulster",District,"Northern Ireland","["Derry", "Tyrone"]",186,NULL
+203,"Newry, Mourne and Down",District,"Northern Ireland","["Armagh", "Down"]",186,NULL
+204,Grouville,Parish,Jersey,NULL,NULL,31
+205,"Saint Brélade",Parish,Jersey,NULL,NULL,31
+206,"Saint Clement",Parish,Jersey,NULL,NULL,31
+207,"Saint Helier",Parish,Jersey,NULL,NULL,31
+208,"Saint John",Parish,Jersey,NULL,NULL,31
+209,"Saint Lawrence",Parish,Jersey,NULL,NULL,31
+210,"Saint Martin, JE",Parish,Jersey,NULL,NULL,31
+211,"Saint Mary",Parish,Jersey,NULL,NULL,31
+212,"Saint Ouen",Parish,Jersey,NULL,NULL,31
+213,"Saint Peter",Parish,Jersey,NULL,NULL,31
+214,"Saint Saviour, JE",Parish,Jersey,NULL,NULL,31
+215,Trinity,Parish,Jersey,NULL,NULL,31
+216,Castel,Parish,Guernsey,"["Guernsey"]",NULL,26
+217,Forest,Parish,Guernsey,"["Guernsey"]",NULL,26
+218,"Saint Andrew",Parish,Guernsey,"["Guernsey"]",NULL,26
+219,Alderney,Parish,Guernsey,"["Alderney"]",NULL,26
+220,"Saint Martin, GG",Parish,Guernsey,"["Guernsey"]",NULL,26
+221,"Saint Peter Port",Parish,Guernsey,"["Guernsey"]",NULL,26
+222,Sark,Parish,Guernsey,"["Sark"]",NULL,26
+223,"Saint Pierre du Bois",Parish,Guernsey,"["Guernsey"]",NULL,26
+224,"Saint Sampson",Parish,Guernsey,"["Guernsey"]",NULL,26
+225,"Saint Saviour, GG",Parish,Guernsey,"["Guernsey"]",NULL,26
+226,Torteval,Parish,Guernsey,"["Guernsey"]",NULL,26
+227,Vale,Parish,Guernsey,"["Guernsey"]",NULL,26
+228,Gwynedd,County,Wales,"["Gwynedd"]",186,NULL
+230,Auvergne-Rhône-Alpes,Region,France,"["Ain", "Allier", "Ardèche", "Cantal", "Drôme", "Isère", "Loire", "Haute-Loire", "Puy-de-Dôme", "Rhône", "Savoie", "Haute-Savoie"]",60,NULL
+231,Bourgogne-Franche-Comté,Region,France,"["Côte-d'Or", "Doubs", "Jura, FR", "Nièvre", "Haute-Saône", "Saône-et-Loire", "Yonne", "Territoire de Belfort"]",60,NULL
+232,"Centre-Val de Loire",Region,France,"["Cher", "Eure-et-Loir", "Indre", "Indre-et-Loire", "Loir-et-Cher", "Loiret"]",60,NULL
+233,"Grand Est",Region,France,"["Ardennes", "Aube", "Marne", "Haute-Marne", "Meurthe-et-Moselle", "Meuse", "Moselle", "Bas-Rhin", "Haut-Rhin", "Vosges"]",60,NULL
+234,Guadeloupe,Region,France,NULL,60,NULL
+235,Hauts-de-France,Region,France,"["Aisne", "Nord", "Oise", "Pas-de-Calais", "Somme"]",60,NULL
+236,Île-de-France,Region,France,"["Paris", "Seine-et-Marne", "Yvelines", "Essonne", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne", "Val-d'Oise"]",60,NULL
+237,Martinique,Region,France,NULL,60,NULL
+238,Mayotte,Region,France,NULL,60,NULL
+239,Nouvelle-Aquitaine,Region,France,"["Charente", "Charente-Maritime", "Corrèze", "Creuse", "Dordogne", "Gironde", "Landes", "Lot-et-Garonne", "Pyrénées-Atlantiques", "Deux-Sèvres", "Vienne", "Haute-Vienne"]",60,NULL
+240,"Pays de la Loire",Region,France,"["Loire-Atlantique", "Maine-et-Loire", "Mayenne", "Sarthe", "Vendée"]",60,NULL
+241,"Provence-Alpes-Côte d'Azur",Region,France,"["Alpes-de-Haute-Provence", "Hautes-Alpes", "Alpes-Maritimes", "Bouches-du-Rhône", "Var", "Vaucluse"]",60,NULL
+242,Bretagne,Region,France,"["Côtes-d'Armor", "Finistère", "Ille-et-Vilaine", "Morbihan"]",60,NULL
+243,Corse,Region,France,"["Corse-du-Sud", "Haute-Corse"]",60,NULL
+244,Guyane,Region,France,"["French Guiana"]",60,NULL
+245,Normandie,Region,France,"["Calvados", "Eure", "Manche", "Orne", "Seine-Maritime"]",60,NULL
+246,Occitanie,Region,France,"["Ariège", "Aude", "Aveyron", "Gard", "Haute-Garonne", "Gers", "Hérault", "Lot", "Lozère", "Hautes-Pyrénées", "Pyrénées-Orientales", "Tarn", "Tarn-et-Garonne"]",60,NULL
+247,"La Réunion",Region,France,"["Réunion"]",60,NULL
+248,Capellen,Canton,Luxembourg,"["Kapellen"]",101,NULL
+249,Clervaux,Canton,Luxembourg,"["Klierf"]",101,NULL
+250,Diekirch,Canton,Luxembourg,NULL,101,NULL
+251,Echternach,Canton,Luxembourg,"["Iechternach"]",101,NULL
+252,Esch-sur-Alzette,Canton,Luxembourg,"["Esch-Uelzecht"]",101,NULL
+253,Grevenmacher,Canton,Luxembourg,"["Gréiwemaacher"]",101,NULL
+254,"Luxembourg, LU",Canton,Luxembourg,"["Lëtzebuerg"]",101,NULL
+255,Mersch,Canton,Luxembourg,"["Miersch"]",101,NULL
+256,Redange,Canton,Luxembourg,"["Réiden"]",101,NULL
+257,Remich,Canton,Luxembourg,"["Réimech"]",101,NULL
+258,Vianden,Canton,Luxembourg,"["Veianen"]",101,NULL
+259,Wiltz,Canton,Luxembourg,"["Wolz"]",101,NULL
+260,Monaco,Country,Monaco,NULL,114,NULL
+261,"Andorra la Vella",Parish,Andorra,NULL,4,NULL
+262,Canillo,Parish,Andorra,NULL,4,NULL
+263,Encamp,Parish,Andorra,NULL,4,NULL
+264,Escaldes–Engordany,Parish,Andorra,NULL,4,NULL
+265,"La Massana",Parish,Andorra,NULL,4,NULL
+266,Ordino,Parish,Andorra,NULL,4,NULL
+267,"Sant Julià de Lòria",Parish,Andorra,NULL,4,NULL
+268,Andalucía,"Autonomous Community",Spain,"["Andalusia"]",165,NULL
+269,Aragón,"Autonomous Community",Spain,"["Aragon"]",165,NULL
+270,Asturias,"Autonomous Community",Spain,NULL,165,NULL
+271,Canarias,"Autonomous Community",Spain,"["Canary Islands"]",165,NULL
+272,Cantabria,"Autonomous Community",Spain,NULL,165,NULL
+273,"Castilla y León","Autonomous Community",Spain,"["Castile and León"]",165,NULL
+274,"Castilla–La Mancha","Autonomous Community",Spain,NULL,165,NULL
+275,Catalunya,"Autonomous Community",Spain,"["Catalonia"]",165,NULL
+276,Ceuta,"Autonomous City",Spain,NULL,165,NULL
+277,"Comunidad de Madrid","Autonomous Community",Spain,"["Madrid"]",165,NULL
+278,"Comunitat Valenciana","Autonomous Community",Spain,"["Valencia"]",165,NULL
+279,Euskadi,"Autonomous Community",Spain,"["Basque Country"]",165,NULL
+280,Extremadura,"Autonomous Community",Spain,NULL,165,NULL
+281,Galicia,"Autonomous Community",Spain,NULL,165,NULL
+282,"Illes Balears","Autonomous Community",Spain,"["Balearic Islands"]",165,NULL
+283,"La Rioja","Autonomous Community",Spain,NULL,165,NULL
+284,Melilla,"Autonomous City",Spain,NULL,165,NULL
+285,Navarra,"Autonomous Community",Spain,"["Navarre"]",165,NULL
+286,"Región de Murcia","Autonomous Community",Spain,"["Murcia"]",165,NULL
+287,"Plazas de soberanía","Unincorporated Area",Spain,"["Strongholds of Sovereignty"]",165,NULL
+288,Gibraltar,Territory,Gibraltar,NULL,NULL,23
+289,Açores,"Autonomous Region",Portugal,"["Azores"]",140,NULL
+290,Aveiro,District,Portugal,NULL,140,NULL
+291,Beja,District,Portugal,NULL,140,NULL
+292,Braga,District,Portugal,NULL,140,NULL
+293,Bragança,District,Portugal,NULL,140,NULL
+294,"Castelo Branco",District,Portugal,NULL,140,NULL
+295,Coimbra,District,Portugal,NULL,140,NULL
+296,Évora,District,Portugal,NULL,140,NULL
+297,Faro,District,Portugal,NULL,140,NULL
+298,Guarda,District,Portugal,NULL,140,NULL
+299,Leiria,District,Portugal,NULL,140,NULL
+300,Lisboa,District,Portugal,"["Lisbon"]",140,NULL
+301,Madeira,District,Portugal,NULL,140,NULL
+302,Portalegre,District,Portugal,NULL,140,NULL
+303,Porto,District,Portugal,NULL,140,NULL
+304,Santarém,District,Portugal,NULL,140,NULL
+305,Setúbal,District,Portugal,NULL,140,NULL
+306,"Viana do Castelo",District,Portugal,NULL,140,NULL
+307,"Vila Real",District,Portugal,NULL,140,NULL
+308,Viseu,District,Portugal,NULL,140,NULL
+309,Antwerpen,Province,Belgium,"["Antwerp"]",17,NULL
+310,"Brabant wallon",Province,Belgium,"["Walloon Brabant"]",17,NULL
+311,"Brussels-Capital Region",Region,Belgium,"["Brussels"]",17,NULL
+312,Hainaut,Province,Belgium,NULL,17,NULL
+313,Liège,Province,Belgium,NULL,17,NULL
+314,"Limburg, BE",Region,Belgium,NULL,17,NULL
+315,"Luxembourg, BE",Province,Belgium,NULL,17,NULL
+316,Namur,Region,Belgium,NULL,17,NULL
+317,Oost-Vlaanderen,Province,Belgium,"["East Flanders"]",17,NULL
+318,Vlaams-Brabant,Province,Belgium,"["Flemish Brabant"]",17,NULL
+319,West-Vlaanderen,Region,Belgium,"["West Flanders"]",17,NULL
+320,Aargau,Canton,Switzerland,NULL,170,NULL
+321,"Appenzell Ausserrhoden",Canton,Switzerland,NULL,170,NULL
+322,"Appenzell Innerrhoden",Canton,Switzerland,NULL,170,NULL
+323,Basel-Landschaft,Canton,Switzerland,"["Basel-Country"]",170,NULL
+324,Basel-Stadt,Canton,Switzerland,"["Basel-City"]",170,NULL
+325,Bern,Canton,Switzerland,"["Berne"]",170,NULL
+326,Fribourg,Canton,Switzerland,"["Freiburg"]",170,NULL
+327,Genève,Canton,Switzerland,"["Geneva"]",170,NULL
+328,Glarus,Canton,Switzerland,NULL,170,NULL
+329,Graubünden,Canton,Switzerland,"["Grisons", "Grischun", "Grigioni"]",170,NULL
+330,"Jura, CH",Canton,Switzerland,NULL,170,NULL
+331,Luzern,Canton,Switzerland,"["Lucerne"]",170,NULL
+332,Neuchâtel,Canton,Switzerland,NULL,170,NULL
+333,Nidwalden,Canton,Switzerland,NULL,170,NULL
+334,Obwalden,Canton,Switzerland,NULL,170,NULL
+335,Schaffhausen,Canton,Switzerland,NULL,170,NULL
+336,Schwyz,Canton,Switzerland,NULL,170,NULL
+337,Solothurn,Canton,Switzerland,NULL,170,NULL
+338,"Sankt Gallen",Canton,Switzerland,"["Saint Gallen"]",170,NULL
+339,Thurgau,Canton,Switzerland,NULL,170,NULL
+340,Ticino,Canton,Switzerland,"["Tessin"]",170,NULL
+341,Uri,Canton,Switzerland,NULL,170,NULL
+342,Valais/Wallis,Canton,Switzerland,"["Valais", "Wallis"]",170,NULL
+343,Vaud,Canton,Switzerland,NULL,170,NULL
+344,Zug,Canton,Switzerland,NULL,170,NULL
+345,Zürich,Canton,Switzerland,NULL,170,NULL
+346,Abruzzo,Region,Italy,NULL,82,NULL
+347,Basilicata,Region,Italy,NULL,82,NULL
+348,Calabria,Region,Italy,NULL,82,NULL
+349,Campania,Region,Italy,NULL,82,NULL
+350,Emilia-Romagna,Region,Italy,NULL,82,NULL
+351,"Friuli-Venezia Giulia",Region,Italy,NULL,82,NULL
+352,Lazio,Region,Italy,NULL,82,NULL
+353,Liguria,Region,Italy,NULL,82,NULL
+354,Lombardia,Region,Italy,"["Lombardy"]",82,NULL
+355,Marche,Region,Italy,NULL,82,NULL
+356,Molise,Region,Italy,NULL,82,NULL
+357,Piemonte,Region,Italy,"["Piedmont"]",82,NULL
+358,Puglia,Region,Italy,"["Apulia"]",82,NULL
+359,Sardegna,Region,Italy,"["Sardinia"]",82,NULL
+360,Sicilia,Region,Italy,"["Sicily"]",82,NULL
+361,"Trentino-Alto Adige/Südtirol",Region,Italy,"["Trentino-South Tyrol", "Trentino-Alto Adige", "Trentino-Südtirol"]",82,NULL
+362,Toscana,Region,Italy,"["Tuscany"]",82,NULL
+363,Umbria,Region,Italy,NULL,82,NULL
+364,"Valle d'Aosta",Region,Italy,"["Aosta Valley"]",82,NULL
+365,Veneto,Region,Italy,NULL,82,NULL
+366,Baden-Württemberg,Flächenländer,Germany,NULL,64,NULL
+367,Bayern,Flächenländer,Germany,"["Bavaria"]",64,NULL
+368,Berlin,Stadtstaaten,Germany,NULL,64,NULL
+369,Brandenburg,Flächenländer,Germany,NULL,64,NULL
+370,Bremen,Stadtstaaten,Germany,NULL,64,NULL
+371,Hamburg,Stadtstaaten,Germany,NULL,64,NULL
+372,Hessen,Flächenländer,Germany,"["Hesse"]",64,NULL
+373,Mecklenburg-Vorpommern,Flächenländer,Germany,NULL,64,NULL
+374,Niedersachsen,Flächenländer,Germany,"["Lower Saxony"]",64,NULL
+375,Nordrhein-Westfalen,Flächenländer,Germany,"["North Rhine-Westphalia"]",64,NULL
+376,Rheinland-Pfalz,Flächenländer,Germany,"["Rhineland-Palatinate"]",64,NULL
+377,Saarland,Flächenländer,Germany,NULL,64,NULL
+378,Sachsen,Flächenländer,Germany,"["Saxony"]",64,NULL
+379,Sachsen-Anhalt,Flächenländer,Germany,"["Saxony-Anhalt"]",64,NULL
+380,Schleswig-Holstein,Flächenländer,Germany,NULL,64,NULL
+381,Thüringen,Flächenländer,Germany,"["Thuringia"]",64,NULL
+382,Bonaire,"Special Municipality",Netherlands,NULL,123,NULL
+383,Drenthe,Province,Netherlands,NULL,123,NULL
+384,Flevoland,Province,Netherlands,NULL,123,NULL
+385,Fryslân,Province,Netherlands,"["Friesland"]",123,NULL
+386,Gelderland,Province,Netherlands,NULL,123,NULL
+387,Groningen,Province,Netherlands,NULL,123,NULL
+388,"Limburg, NL",Province,Netherlands,NULL,123,NULL
+389,Noord-Brabant,Province,Netherlands,"["North Brabant"]",123,NULL
+390,Noord-Holland,Province,Netherlands,"["North Holland"]",123,NULL
+391,Overijssel,Province,Netherlands,NULL,123,NULL
+392,Saba,"Special Municipality",Netherlands,NULL,123,NULL
+393,"Sint Eustatius","Special Municipality",Netherlands,NULL,123,NULL
+394,Utrecht,Province,Netherlands,NULL,123,NULL
+395,Zeeland,Province,Netherlands,NULL,123,NULL
+396,Zuid-Holland,Province,Netherlands,"["South Holland"]",123,NULL
+397,"Region Hovedstaden",Region,Denmark,"["Capital Region of Denmark"]",45,NULL
+398,"Region Midtjylland",Region,Denmark,"["Central Denmark Region"]",45,NULL
+399,"Region Nordjylland",Region,Denmark,"["North Denmark Region"]",45,NULL
+400,"Region Sjælland",Region,Denmark,"["Region Zealand"]",45,NULL
+401,"Region Syddanmark",Region,Denmark,"["Region of Southern Denmark"]",45,NULL
+402,"Eysturoyar sýsla",Sýsla,"Faroe Islands","["Eysturoy Region"]",NULL,20
+403,"Norðoya sýsla",Sýsla,"Faroe Islands","["Norðoyar Region"]",NULL,20
+404,"Sandoyar sýsla",Sýsla,"Faroe Islands","["Sandoy Region"]",NULL,20
+405,"Streymoyar sýsla",Sýsla,"Faroe Islands","["Streymoy Region"]",NULL,20
+406,"Suðuroyar sýsla",Sýsla,"Faroe Islands","["Suðuroy Region"]",NULL,20
+407,"Vága sýsla",Sýsla,"Faroe Islands","["Vágar Region"]",NULL,20
+408,Balzers,Municipality,Liechtenstein,NULL,99,NULL
+409,Eschen,Municipality,Liechtenstein,NULL,99,NULL
+410,Gamprin,Municipality,Liechtenstein,NULL,99,NULL
+411,Mauren,Municipality,Liechtenstein,NULL,99,NULL
+412,Planken,Municipality,Liechtenstein,NULL,99,NULL
+413,Ruggell,Municipality,Liechtenstein,NULL,99,NULL
+414,Schaan,Municipality,Liechtenstein,NULL,99,NULL
+415,Schellenberg,Municipality,Liechtenstein,NULL,99,NULL
+416,Triesen,Municipality,Liechtenstein,NULL,99,NULL
+417,Triesenberg,Municipality,Liechtenstein,NULL,99,NULL
+418,Vaduz,Municipality,Liechtenstein,NULL,99,NULL
+419,Acquaviva,Castello,"San Marino",NULL,150,NULL
+420,"Borgo Maggiore",Castello,"San Marino",NULL,150,NULL
+421,Chiesanuova,Castello,"San Marino",NULL,150,NULL
+422,Domagnano,Castello,"San Marino",NULL,150,NULL
+423,Faetano,Castello,"San Marino",NULL,150,NULL
+424,Fiorentino,Castello,"San Marino",NULL,150,NULL
+425,Montegiardino,Castello,"San Marino",NULL,150,NULL
+426,"San Marino",Castello,"San Marino",NULL,150,NULL
+427,Serravalle,Castello,"San Marino",NULL,150,NULL
+428,"Città del Vaticano",Country,"Vatican City",NULL,191,NULL
+429,"Reġjun Għawdex",Region,Malta,"["Gozo Region"]",107,NULL
+430,"Reġjun Lvant",Region,Malta,"["Eastern Region"]",107,NULL
+431,"Reġjun Nofsinhar",Region,Malta,"["Southern Region"]",107,NULL
+432,"Reġjun Punent",Region,Malta,"["Western Region"]",107,NULL
+433,"Reġjun tal-Port",Region,Malta,"["Port Region"]",107,NULL
+434,"Reġjun Tramuntana",Region,Malta,"["Northern Region"]",107,NULL
+435,Burgenland,Land,Austria,NULL,10,NULL
+436,Kärnten,Land,Austria,"["Carinthia"]",10,NULL
+437,Nieder­österreich,Land,Austria,"["Lower Austria"]",10,NULL
+438,Oberösterreich,Land,Austria,"["Upper Austria"]",10,NULL
+439,Salzburg,Land,Austria,NULL,10,NULL
+440,Steiermark,Land,Austria,"["Styria"]",10,NULL
+441,Tirol,Land,Austria,"["Tyrol"]",10,NULL
+442,Vorarlberg,Land,Austria,NULL,10,NULL
+443,Wien,Land,Austria,"["Vienna"]",10,NULL
+444,"Jihočeský kraj",Region,"Czech Republic","["South Bohemian Region"]",43,NULL
+445,"Jihomoravský kraj",Region,"Czech Republic","["South Moravian Region"]",43,NULL
+446,"Karlovarský kraj",Region,"Czech Republic","["Karlovy Vary Region"]",43,NULL
+447,"Královéhradecký kraj",Region,"Czech Republic","["Hradec Králové Region"]",43,NULL
+448,"Kraj Vysočina",Region,"Czech Republic","["Vysočina Region"]",43,NULL
+449,"Liberecký kraj",Region,"Czech Republic","["Liberec Region"]",43,NULL
+450,"Moravskoslezský kraj",Region,"Czech Republic","["Moravian-Silesian Region"]",43,NULL
+451,"Olomoucký kraj",Region,"Czech Republic","["Olomouc Region"]",43,NULL
+452,"Pardubický kraj",Region,"Czech Republic","["Pardubice Region"]",43,NULL
+453,"Plzeňský kraj",Region,"Czech Republic","["Plzeň Region"]",43,NULL
+454,Praha,Region,"Czech Republic","["Prague"]",43,NULL
+455,"Středočeský kraj",Region,"Czech Republic","["Central Bohemian Region"]",43,NULL
+456,"Ústecký kraj",Region,"Czech Republic","["Ústí nad Labem Region"]",43,NULL
+457,"Zlínský kraj",Region,"Czech Republic","["Zlín Region"]",43,NULL
+458,Dolnośląskie,Voivodeship,Poland,"["Lower Silesian Voivodeship"]",139,NULL
+459,Kujawsko-Pomorskie,Voivodeship,Poland,"["Kuyavian–Pomeranian Voivodeship"]",139,NULL
+460,Łódzkie,Voivodeship,Poland,"["Łódź Voivodeship"]",139,NULL
+461,Lubelskie,Voivodeship,Poland,"["Lublin Voivodeship"]",139,NULL
+462,Lubuskie,Voivodeship,Poland,"["Lubusz Voivodeship"]",139,NULL
+463,Małopolskie,Voivodeship,CPoland,"["Lesser Poland Voivodeship"]",139,NULL
+464,Mazowieckie,Voivodeship,Poland,"["Masovian Voivodeship"]",139,NULL
+465,Opolskie,Voivodeship,Poland,"["Opole Voivodeship"]",139,NULL
+466,Podkarpackie,Voivodeship,Poland,"["Subcarpathian Voivodeship"]",139,NULL
+467,Podlaskie,Voivodeship,Poland,"["Podlaskie Voivodeship"]",139,NULL
+468,Pomorskie,Voivodeship,Poland,"["Pomeranian Voivodeship"]",139,NULL
+469,Śląskie,Voivodeship,Poland,"["Silesian Voivodeship"]",139,NULL
+470,Świętokrzyskie,Voivodeship,Poland,"["Holy Cross Voivodeship"]",139,NULL
+471,Warmińsko-Mazurskie,Voivodeship,Poland,"["Warmian–Masurian Voivodeship"]",139,NULL
+472,Wielkopolskie,Voivodeship,Poland,"["Greater Poland Voivodeship"]",139,NULL
+473,Zachodniopomorskie,Voivodeship,Poland,"["West Pomeranian Voivodeship"]",139,NULL
+474,"Banskobystrický kraj",Region,Slovakia,"["Banská Bystrica Region"]",158,NULL
+475,"Bratislavský kraj",Region,Slovakia,"["Bratislava Region"]",158,NULL
+476,"Košický kraj",Region,Slovakia,"["Košice Region"]",158,NULL
+477,"Nitriansky kraj",Region,Slovakia,"["Nitra Region"]",158,NULL
+478,"Prešovský kraj",Region,Slovakia,"["Prešov Region"]",158,NULL
+479,"Trenčiansky kraj",Region,Slovakia,"["Trenčín Region"]",158,NULL
+480,"Trnavský kraj",Region,Slovakia,"["Trnava Region"]",158,NULL
+481,"Žilinský kraj",Region,Slovakia,"["Žilina Region"]",158,NULL
+482,Baranya,County,Hungary,NULL,74,NULL
+483,Bács-Kiskun,County,Hungary,NULL,74,NULL
+484,Békés,County,Hungary,NULL,74,NULL
+485,Borsod-Abaúj-Zemplén,County,Hungary,NULL,74,NULL
+486,Budapest,County,Hungary,NULL,74,NULL
+487,Csongrád-Csanád,County,Hungary,NULL,74,NULL
+488,Fejér,County,Hungary,NULL,74,NULL
+489,Győr-Moson-Sopron,County,Hungary,NULL,74,NULL
+490,Hajdú-Bihar,County,Hungary,NULL,74,NULL
+491,Heves,County,Hungary,NULL,74,NULL
+492,Jász-Nagykun-Szolnok,County,Hungary,NULL,74,NULL
+493,Komárom-Esztergom,County,Hungary,NULL,74,NULL
+494,Nógrád,County,Hungary,NULL,74,NULL
+495,Pest,County,Hungary,NULL,74,NULL
+496,Somogy,County,Hungary,NULL,74,NULL
+497,Szabolcs-Szatmár-Bereg,County,Hungary,NULL,74,NULL
+498,Tolna,County,Hungary,NULL,74,NULL
+499,Vas,County,Hungary,NULL,74,NULL
+500,Veszprém,County,Hungary,NULL,74,NULL
+501,Zala,County,Hungary,NULL,74,NULL
+502,Gorenjska,"Statistical Region",Slovenia,"["Jesenice", "Kranj", "Radovljica", "Škofja Loka", "Tržič"]",159,NULL
+503,Goriška,"Statistical Region",Slovenia,"["Ajdovščina", "Idrija", "Nova Gorica", "Tolmin"]",159,NULL
+504,"Jugovzhodna Slovenija","Statistical Region",Slovenia,"["Črnomelj", "Kočevje", "Metlika", "Novo Mesto", "Ribnica", "Trebnje"]",159,NULL
+505,Koroška,"Statistical Region",Slovenia,"["Dravograd", "Radlje ob Dravi", "Ravne na Koroškem", "Slovenj Gradec"]",159,NULL
+506,Obalno-Kraška,"Statistical Region",Slovenia,"["Izola", "Koper", "Piran", "Sežana"]",159,NULL
+507,Osrednjeslovenska,"Statistical Region",Slovenia,"["Domžale", "Grosuplje", "Kamnik", "Ljubljana", "Logatec", "Vrhnika"]",159,NULL
+508,Podravska,"Statistical Region",Slovenia,"["Lenart", "Maribor", "Ormož", "Pesnica", "Ptuj", "Ruše", "Slovenska Bistrica"]",159,NULL
+509,Pomurska,"Statistical Region",Slovenia,"["Gornja Radgona", "Lendava", "Ljutomer", "Murska Sobota"]",159,NULL
+510,Posavska,"Statistical Region",Slovenia,"["Brežice", "Krško", "Sevnica"]",159,NULL
+511,Primorsko-Notranjska,"Statistical Region",Slovenia,"["Cerknica", "Ilirska Bistrica", "Postojna"]",159,NULL
+512,Savinjska,"Statistical Region",Slovenia,"["Celje", "Laško", "Mozirje", "Slovenske Konjice", "Šentjur", "Šmarje pri Jelšah", "Velenje", "Žalec"]",159,NULL
+513,Zasavska,"Statistical Region",Slovenia,"["Hrastnik", "Litija", "Trbovlje", "Zagorje ob Savi"]",159,NULL
