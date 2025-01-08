@@ -379,7 +379,7 @@
                 if (newValue === row.FullName) {
                     // Check if another row exists with the same Name and MyName (Step B)
                     const matchingRow = tableData.find(
-                        (item) => item.FullName === newValue && item.MyName === newValue && item.id !== id
+                        (item) => item.FullName === newValue && item.MyName === newValue && item.idRegion !== id
                     );
 
                     if (matchingRow) {
