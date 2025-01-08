@@ -2,6 +2,7 @@
 public/initial.html
 reversed_coordinates.json
 coordinateReverser.js
+geojson_data/sloveniaOriginal.geojson
 
 # Ignore the node_modules directory
 node_modules/
