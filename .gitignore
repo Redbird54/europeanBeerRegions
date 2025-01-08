@@ -1,0 +1,14 @@
+# Ignore files
+public/initial.html
+reversed_coordinates.json
+coordinateReverser.js
+geojson_data/sloveniaOriginal.geojson
+
+# Ignore the node_modules directory
+node_modules/
+
+# Ignore .env files (for environment variables)
+.env
+
+# Ignore logs
+*.log
