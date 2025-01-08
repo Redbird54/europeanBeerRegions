@@ -1,0 +1,13 @@
+# Ignore files
+public/initial.html
+reversed_coordinates.json
+coordinateReverser.js
+
+# Ignore the node_modules directory
+node_modules/
+
+# Ignore .env files (for environment variables)
+.env
+
+# Ignore logs
+*.log

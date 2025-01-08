@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Authority Districts Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        #map {
+            height: 100%; /* Ensure it fills the container */
+            width: 100%;
+            background-color: white; /* Set map background to white */
+            border: 2px solid black; /* Add a black border around the map */
+            box-sizing: border-box; /* Include the border in the element's total dimensions */
+        }
+        /* .leaflet-container { //seem to be using too much memory for optimization. If from leaflet try using this if problems start
+            will-change: unset;
+        } */
+    </style>  
+</head>
+<body>
+    <div id="map" style="height: 600px;"></div> <!-- Map container --> 
+    <script>
+        let geoJsonLayer;
+        let pendingMessages = [];
+        const regionKey = (name, country) => `${name}, ${country}`;
+        const dependentRegions = {
+            "Bedfordshire": {
+                country: "England",
+                regions: ["Bedford", "Central Bedfordshire", "Luton"],
+                isoCodes: ["GB-BDF", "GB-CBF", "GB-LUT"]
+            },
+            "Berkshire": {
+                country: "England",
+                regions: ["Bracknell Forest", "Reading", "Slough", "West Berkshire", "Windsor and Maidenhead", "Wokingham"],
+                isoCodes: ["GB-BRC", "GB-RDG", "GB-SLG", "GB-WBK", "GB-WNM", "GB-WOK"]
+            },
+            "Buckinghamshire": {
+                country: "England",
+                regions: ["Buckinghamshire", "Milton Keynes"],
+                isoCodes: ["GB-BKM", "GB-MIK"]
+            },
+            "Cambridgeshire": {
+                country: "England",
+                regions: ["Cambridgeshire", "Peterborough"],
+                isoCodes: ["GB-CAM", "GB-PTE"]
+            },
+            "Cheshire": {
+                country: "England",
+                regions: ["Cheshire East", "Cheshire West and Chester", "Halton", "Warrington"],
+                isoCodes: ["GB-CHE", "GB-CHW", "GB-HAL", "GB-WRT"]
+            },
+            "Cornwall": {
+                country: "England",
+                regions: ["Cornwall", "Isles of Scilly"],
+                isoCodes: ["GB-CON", "GB-IOS"]
+            },
+            "Cumbria": {
+                country: "England",
+                regions: ["Cumberland", "Westmorland and Furness"],
+                isoCodes: ["GB-CBL", "GB-WLF"]
+            },
+            "Derbyshire": {
+                country: "England",
+                regions: ["Derby", "Derbyshire"],
+                isoCodes: ["GB-DER", "GB-DBY"]
+            },
+            "Devon": {
+                country: "England",
+                regions: ["Devon", "Plymouth", "Torbay"],
+                isoCodes: ["GB-DEV", "GB-PLY", "GB-TOB"]
+            },
+            "Dorset": {
+                country: "England",
+                regions: ["Bournemouth, Christchurch and Poole", "Dorset"],
+                isoCodes: ["GB-BCP", "GB-DOR"]
+            },
+            "Durham": {
+                country: "England",
+                regions: ["County Durham", "Darlington", "Hartlepool", "Stockton-on-Tees"],
+                isoCodes: ["GB-DUR", "GB-DAL", "GB-HPL", "GB-STT"]
+            },
+            "East Riding of Yorkshire": {
+                country: "England",
+                regions: ["East Riding of Yorkshire", "Kingston upon Hull"],
+                isoCodes: ["GB-ERY", "GB-KHL"]
+            },
+            "East Sussex": {
+                country: "England",
+                regions: ["Brighton and Hove", "East Sussex"],
+                isoCodes: ["GB-BNH", "GB-ESX"]
+            },
+            "Essex": {
+                country: "England",
+                regions: ["Essex", "Southend-on-Sea", "Thurrock"],
+                isoCodes: ["GB-ESS", "GB-SOS", "GB-THR"]
+            },
+            "Gloucestershire": {
+                country: "England",
+                regions: ["Gloucestershire", "South Gloucestershire"],
+                isoCodes: ["GB-GLS", "GB-SGC"]
+            },
+            "Hampshire": {
+                country: "England",
+                regions: ["Hampshire", "Portsmouth", "Southampton"],
+                isoCodes: ["GB-HAM", "GB-POR", "GB-STH"]
+            },
+            "Kent": {
+                country: "England",
+                regions: ["Kent", "Medway"],
+                isoCodes: ["GB-KEN", "GB-MDW"]
+            },
+            "Lancashire": {
+                country: "England",
+                regions: ["Blackburn with Darwen", "Blackpool", "Lancashire"],
+                isoCodes: ["GB-BBD", "GB-BPL", "GB-LAN"]
+            },
+            "Leicestershire": {
+                country: "England",
+                regions: ["Leicester", "Leicestershire"],
+                isoCodes: ["GB-LCE", "GB-LEC"]
+            },
+            "Lincolnshire": {
+                country: "England",
+                regions: ["Lincolnshire", "North East Lincolnshire", "North Lincolnshire"],
+                isoCodes: ["GB-LIN", "GB-NEL", "GB-NLN"]
+            },
+            "North Yorkshire": {
+                country: "England",
+                regions: ["Middlesbrough", "North Yorkshire", "Redcar and Cleveland", "Stockton-on-Tees", "York"],
+                isoCodes: ["GB-MDB", "GB-NYK", "GB-RCC", "GB-STT", "GB-YOR"]
+            },
+            "Northamptonshire": {
+                country: "England",
+                regions: ["North Northamptonshire", "West Northamptonshire"],
+                isoCodes: ["GB-NNH", "GB-WNH"]
+            },
+            "Nottinghamshire": {
+                country: "England",
+                regions: ["Nottingham", "Nottinghamshire"],
+                isoCodes: ["GB-NGM", "GB-NTT"]
+            },
+            "Somerset": {
+                country: "England",
+                regions: ["Bath and North East Somerset", "North Somerset", "Somerset"],
+                isoCodes: ["GB-BAS", "GB-NSM", "GB-SOM"]
+            },
+            "Staffordshire": {
+                country: "England",
+                regions: ["Staffordshire", "Stoke-on-Trent"],
+                isoCodes: ["GB-STS", "GB-STE"]
+            },
+            "Shropshire": {
+                country: "England",
+                regions: ["Shropshire", "Telford and Wrekin"],
+                isoCodes: ["GB-SHR", "GB-TFW"]
+            },
+            "Wiltshire": {
+                country: "England",
+                regions: ["Swindon", "Wiltshire"],
+                isoCodes: ["GB-SWD", "GB-WIL"]
+            },
+
+            "Clwyd": {
+                country: "Wales",
+                regions: ["Conwy", "Denbighshire", "Flintshire", "Wrexham"],
+                isoCodes: ["GB-CWY", "GB-DEN", "GB-FLN", "GB-WRX"]
+            },
+            "Dyfed": {
+                country: "Wales",
+                regions: ["Carmarthenshire", "Ceredigion", "Pembrokeshire"],
+                isoCodes: ["GB-CMN", "GB-CGN", "GB-PEM"]
+            },
+            "Gwent": {
+                country: "Wales",
+                regions: ["Blaenau Gwent", "Caerphilly", "Monmouthshire", "Newport", "Torfaen"],
+                isoCodes: ["GB-BGW", "GB-CAY", "GB-MON", "GB-NWP", "GB-TOF"]
+            },
+            "Gwynedd": {
+                country: "Wales",
+                regions: ["Gwynedd", "Isle of Anglesey"],
+                isoCodes: ["GB-GWN", "GB-AGY"]
+            },
+            "Mid Glamorgan": {
+                country: "Wales",
+                regions: ["Bridgend", "Merthyr Tydfil", "Rhondda Cynon Taf"],
+                isoCodes: ["GB-BGE", "GB-MTY", "GB-RCT"]
+            },
+            "South Glamorgan": {
+                country: "Wales",
+                regions: ["Cardiff", "Vale of Glamorgan"],
+                isoCodes: ["GB-CRF", "GB-VGL"]
+            },
+            "West Glamorgan": {
+                country: "Wales",
+                regions: ["Neath Port Talbot", "Swansea"],
+                isoCodes: ["GB-NTL", "GB-SWA"]
+            },
+
+            "Jersey": {
+                country: "Jersey",
+                regions: ["Grouville", "Saint Brélade", "Saint Clement", "Saint Helier", "Saint John", "Saint Lawrence", "Saint Martin, JE", "Saint Mary", "Saint Ouen", "Saint Peter", "Saint Saviour, JE", "Trinity"],
+                isoCodes: ["JE-01", "JE-02", "JE-03", "JE-04", "JE-05", "JE-06", "JE-07", "JE-08", "JE-09", "JE-10", "JE-11", "JE-12"]
+            },
+            "Guernsey": {
+                country: "Guernsey",
+                regions: ["Castel", "Forest", "Saint Andrew", "Saint Martin, GG", "Saint Peter Port", "Saint Pierre du Bois", "Saint Sampson", "Saint Saviour, GG", "Torteval", "Vale"],
+                isoCodes: ["GG-02", "GG-03", "GG-04", "GG-05", "GG-06", "GG-07", "GG-08", "GG-09", "GG-11", "GG-12"]
+            },
+            "Andorra": {
+                country: "Andorra",
+                regions: ["Andorra la Vella", "Canillo", "Encamp", "Escaldes–Engordany", "La Massana", "Ordino", "Sant Julià de Lòria"],
+                isoCodes: ["AD-07", "AD-02", "AD-03", "AD-08", "AD-04", "AD-05", "AD-06"]
+            },
+            "Faroe Islands": { 
+                country: "Faroe Islands",
+                regions: ["Eysturoyar sýsla", "Norðoya sýsla", "Sandoyar sýsla", "Streymoyar sýsla", "Suðuroyar sýsla", "Vága sýsla"],
+                isoCodes: ["FO-01", "FO-02", "FO-03", "FO-04", "FO-05", "FO-06"]
+            },
+            "Liechtenstein": {
+                country: "Liechtenstein",
+                regions: ["Balzers", "Eschen", "Gamprin", "Mauren", "Planken", "Ruggell", "Schaan", "Schellenberg", "Triesen", "Triesenberg", "Vaduz"],
+                isoCodes: ["LI-01", "LI-02", "LI-03", "LI-04", "LI-05", "LI-06", "LI-07", "LI-08", "LI-09", "LI-10", "LI-11"]
+            },
+            "San Marino": {
+                country: "San Marino",
+                regions: ["Acquaviva", "Borgo Maggiore", "Chiesanuova", "Domagnano", "Faetano", "Fiorentino", "Montegiardino", "San Marino", "Serravalle"],
+                isoCodes: ["SM-01", "SM-06", "SM-02", "SM-03", "SM-04", "SM-05", "SM-08", "SM-07", "SM-09"]
+            },
+            "Malta": {
+                country: "Malta",
+                regions: ["Reġjun Għawdex", "Reġjun Lvant", "Reġjun Nofsinhar", "Reġjun Punent", "Reġjun tal-Port", "Reġjun Tramuntana"],
+                isoCodes: ["MT-GH", "MT-LV", "MT-NO", "MT-PU", "MT-TP", "MT-TR"]
+            },
+            "Gorenjska": {
+                country: "Slovenia",
+                regions: ["Jesenice", "Kranj", "Radovljica", "Škofja Loka", "Tržič"],
+                isoCodes: ["SI-041", "SI-052", "SI-102", "SI-122", "SI-131"]
+            },
+            "Goriška": {
+                country: "Slovenia",
+                regions: ["Ajdovščina", "Idrija", "Nova Gorica", "Tolmin"],
+                isoCodes: ["SI-001", "SI-036", "SI-084", "SI-128"]
+            },
+            "Jugovzhodna Slovenija": {
+                country: "Slovenia",
+                regions: ["Črnomelj", "Kočevje", "Metlika", "Novo Mesto", "Ribnica", "Trebnje"],
+                isoCodes: ["SI-017", "SI-048", "SI-073", "SI-085", "SI-104", "SI-130"]
+            },
+            "Koroška": {
+                country: "Slovenia",
+                regions: ["Dravograd", "Radlje ob Dravi", "Ravne na Koroškem", "Slovenj Gradec"],
+                isoCodes: ["SI-025", "SI-101", "SI-103", "SI-112"]
+            },
+            "Obalno-Kraška": {
+                country: "Slovenia",
+                regions: ["Izola", "Koper", "Piran", "Sežana"],
+                isoCodes: ["SI-040", "SI-050", "SI-090", "SI-111"]
+            },
+            "Osrednjeslovenska": {
+                country: "Slovenia",
+                regions: ["Domžale", "Grosuplje", "Kamnik", "Ljubljana", "Logatec", "Vrhnika"],
+                isoCodes: ["SI-023", "SI-032", "SI-043", "SI-061", "SI-064", "SI-140"]
+            },
+            "Podravska": {
+                country: "Slovenia",
+                regions: ["Lenart", "Maribor", "Ormož", "Pesnica", "Ptuj", "Ruše", "Slovenska Bistrica"],
+                isoCodes: ["SI-058", "SI-070", "SI-087", "SI-089", "SI-096", "SI-108", "SI-113"]
+            },
+            "Pomurska": {
+                country: "Slovenia",
+                regions: ["Gornja Radgona", "Lendava", "Ljutomer", "Murska Sobota"],
+                isoCodes: ["SI-029", "SI-059", "SI-063", "SI-080"]
+            },
+            "Posavska": {
+                country: "Slovenia",
+                regions: ["Brežice", "Krško", "Sevnica"],
+                isoCodes: ["SI-009", "SI-054", "SI-110"]
+            },
+            "Primorsko-Notranjska": {
+                country: "Slovenia",
+                regions: ["Cerknica", "Ilirska Bistrica", "Postojna"],
+                isoCodes: ["SI-013", "SI-038", "SI-094"]
+            },
+            "Savinjska": {
+                country: "Slovenia",
+                regions: ["Celje", "Laško", "Mozirje", "Slovenske Konjice", "Šentjur", "Šmarje pri Jelšah", "Velenje", "Žalec"],
+                isoCodes: ["SI-011", "SI-057", "SI-079", "SI-114", "SI-120", "SI-124", "SI-133", "SI-190"]
+            },
+            "Zasavska": {
+                country: "Slovenia",
+                regions: ["Hrastnik", "Litija", "Trbovlje", "Zagorje ob Savi"],
+                isoCodes: ["SI-034", "SI-060", "SI-129", "SI-142"]
+            },
+            "Corse": {
+                country: "France",
+                regions: ["Corse-du-Sud", "Haute-Corse"],
+                isoCodes: ["FR-2A", "FR-2B"]
+            }
+            // Add more mappings as needed
+        };
+
+        function initializseMap() {
+            // Create a Leaflet map centered on Scotland (adjust coordinates if needed)
+            return L.map('map', {
+                center: [50, -4.2026],  // Scotland's coordinates (change if needed)
+                zoom: 5,                      // Zoom level
+                zoomControl: false,           // Disable zoom controls
+                attributionControl: false     // Disable attribution control
+            });
+        }
+
+        function addTileLayer(map) {
+            // Set the entire map background to white by adding a tile layer with no tiles
+            L.tileLayer('', {
+                minZoom: 4, //FIX THIS LATER
+                maxZoom: 13
+            }).addTo(map);
+        }
+
+        function setupMessageListener() {
+            window.addEventListener('message', event => {
+                if (event.data.tableData) {
+                    // If geoJsonLayer is ready, process the message
+                    if (geoJsonLayer) {
+                        highlightMapRegions(event.data.tableData);
+                    } else {
+                        // Otherwise, queue the message
+                        pendingMessages.push(event.data.tableData);
+                    }
+                }
+            });
+        }
+
+        function fetchGeoJSON(map) {
+            const geoJsonUrls = [
+                '../geojson_data/UKRegions.geojson', // source: https://geoportal.statistics.gov.uk/datasets/ons::local-authority-districts-december-2023-boundaries-uk-buc-2/about
+                '../geojson_data/isleOfMan.geojson', // source: https://github.com/codeforgermany/click_that_hood/blob/main/public/data/isle-of-man.geojson?short_path=dcb8088
+                '../geojson_data/irelandCounties.geojson', // source: https://github.com/codeforgermany/click_that_hood/blob/main/public/data/ireland-counties.geojson
+                '../geojson_data/channel_islands.geojson', // source: https://www.arcgis.com/home/item.html?id=4091c7e004c24145ab436a9d542966e4&view=list&sortOrder=desc&sortField=defaultFSOrder#overview AND https://services-eu1.arcgis.com/HmXX14BUtsRH0WH5/arcgis/rest/services/gbrbrc_admn_ad0_py_s0_internal_various_LAD_PARISH_BFE_BNG/FeatureServer/0/query?where=CRNDPNCYNM%20IN%20(%27Bailiwick%20of%20Guernsey%27,%20%27Bailiwick%20of%20Jersey%27)&outFields=*&f=geojson
+                '../geojson_data/franceDepartments.geojson', // source: https://github.com/gregoiredavid/france-geojson/blob/master/departements.geojson
+                '../geojson_data/luxCantons.geojson', // source: https://github.com/codeforgermany/click_that_hood/blob/main/public/data/luxembourg-cantons.geojson
+                '../geojson_data/monaco.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/andorra.geojson', // source: https://simplemaps.com/gis/country/ad
+                '../geojson_data/spainCommunities.geojson', // source: https://public.opendatasoft.com/explore/dataset/georef-spain-comunidad-autonoma/export/?disjunctive.acom_code&disjunctive.acom_name
+                '../geojson_data/gibraltar.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/portugalDistricts.geojson', // source: https://data.opendatasoft.com/explore/dataset/districts-portugal@e-redes/export/?flg=en-us
+                '../geojson_data/belgiumProvinces.geojson', // source: https://data.europa.eu/data/datasets/https-www-odwb-be-explore-dataset-provincesprovincies-belgium-?locale=en
+                '../geojson_data/swissCantons.geojson', // source: https://data.opendatasoft.com/explore/dataset/georef-switzerland-kanton%40public/export/?disjunctive.kan_code&disjunctive.kan_name&sort=year&location=13,47.55382,7.61095&basemap=jawg.streets
+                '../geojson_data/italyRegions.geojson', // source: https://public.opendatasoft.com/explore/dataset/georef-italy-regione/export/?disjunctive.rip_code&disjunctive.rip_name&disjunctive.reg_code&disjunctive.reg_name
+                '../geojson_data/germanyStates.geojson', // source: https://public.opendatasoft.com/explore/dataset/georef-germany-land/export/?disjunctive.lan_code&disjunctive.lan_name
+                '../geojson_data/netherlandsProvinces.geojson', // source: https://cartographyvectors.com/map/682-netherlands
+                '../geojson_data/denmarkRegions.geojson', // source: https://cartographyvectors.com/map/1434-denmark-with-regions
+                '../geojson_data/faroeIslands.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/icelandRegions.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/liechtenstein.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/sanMarino.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/vaticanCity.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/maltaRegions.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/austriaStates.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/czechRegions.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/polandVoivodeships.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/slovakiaRegions.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/hungaryCounties.geojson', // source: https://overpass-turbo.eu/
+                '../geojson_data/sloveniaMunicipalities.geojson', // source: https://overpass-turbo.eu/ //USING MUNICIPALITIES MAKES IT INCOMPRABLE WITH DB
+            ];
+
+            // Fetch both GeoJSON files
+            Promise.all(geoJsonUrls.map(url => fetch(url).then(res => res.json())))
+            .then(dataSets => {
+                // ([ukData, manxData, irishData, channelData, frenchData, luxData, monacoData, andData, spainData, gbzData, portData, belgiumData, swissData, italyData, germanyData]) => {
+                // Merge both datasets into one array of features
+                // const allRegions = [...ukData.features, ...manxData.features, ...irishData.features, ...channelData.features, ...frenchData.features, ...luxData.features, ...monacoData.features, ...andData.features, ...spainData.features, ...gbzData.features, ...portData.features, ...belgiumData.features, ...swissData.features, ...italyData.features, ...germanyData.features];
+                const allRegions = dataSets.reduce((features, data) => [...features, ...data.features], []);
+
+                // Function to combine regions by name
+                function combineRegions(data, countryName, regionNames, newName) {
+                    const features = data.features.filter(feature =>
+                        regionNames.includes(feature.properties.name)
+                    );
+            
+                    if (features.length > 0) {
+                        regionNames.forEach(name => {
+                            const index = allRegions.findIndex(
+                                feature => feature.properties.name === name
+                            );
+                            if (index > -1) allRegions.splice(index, 1);
+                        });
+                
+                        let combinedGeometry = features[0].geometry;
+                
+                        for (let i = 1; i < features.length; i++) {
+                            combinedGeometry = turf.union(
+                                turf.feature(combinedGeometry),
+                                turf.feature(features[i].geometry)
+                            ).geometry;
+                        }
+
+                        // Create and add the new combined region
+                        const newRegion = {
+                            type: "Feature",
+                            properties: { name: newName, country: countryName },
+                            geometry: combinedGeometry
+                        };
+                        allRegions.push(newRegion);
+                    }
+                }
+
+                // Combine regions
+                // French Regions
+                // {
+                //     let country = "France";
+                //     combineRegions(dataSets[4], country,
+                //         ["Allier", "Cantal", "Haute-Loire", "Puy-de-Dôme", "Ain", "Ardèche", "Drôme", "Haute-Savoie", "Isère", "Loire", "Rhône", "Savoie"],
+                //         "Auvergne-Rhône-Alpes"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Côte-d'Or", "Nièvre", "Saône-et-Loire", "Yonne", "Doubs", "Jura", "Haute-Saône", "Territoire de Belfort"],
+                //         "Bourgogne-Franche-Comté"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Côtes-d'Armor", "Finistère", "Ille-et-Vilaine", "Morbihan"],
+                //         "Bretagne"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Cher", "Eure-et-Loir", "Indre", "Indre-et-Loire", "Loir-et-Cher", "Loiret"],
+                //         "Centre-Val de Loire"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Corse-du-Sud", "Haute-Corse"],
+                //         "Corse"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Essonne", "Hauts-de-Seine", "Paris", "Seine-et-Marne", "Seine-Saint-Denis", "Val-d'Oise", "Val-de-Marne", "Yvelines"],
+                //         "Île-de-France"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Bas-Rhin", "Haut-Rhin", "Ardennes", "Aube", "Haute-Marne", "Marne", "Meurthe-et-Moselle", "Meuse", "Moselle", "Vosges"],
+                //         "Grand Est"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Nord", "Pas-de-Calais", "Aisne", "Oise", "Somme"],
+                //         "Hauts-de-France"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Calvados", "Manche", "Orne", "Eure", "Seine-Maritime"],
+                //         "Normandie"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Dordogne", "Gironde", "Landes", "Lot-et-Garonne", "Pyrénées-Atlantiques", "Corrèze", "Creuse", "Haute-Vienne", "Charente", "Charente-Maritime", "Deux-Sèvres", "Vienne"],
+                //         "Nouvelle-Aquitaine"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Aude", "Gard", "Hérault", "Lozère", "Pyrénées-Orientales", "Ariège", "Aveyron", "Gers", "Haute-Garonne", "Hautes-Pyrénées", "Lot", "Tarn", "Tarn-et-Garonne"],
+                //         "Occitanie"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Loire-Atlantique", "Maine-et-Loire", "Mayenne", "Sarthe", "Vendée"],
+                //         "Pays de la Loire"
+                //     );
+
+                //     combineRegions(dataSets[4], country,
+                //         ["Alpes-de-Haute-Provence", "Alpes-Maritimes", "Bouches-du-Rhône", "Hautes-Alpes", "Var", "Vaucluse"],
+                //         "Provence-Alpes-Côte d'Azur"
+                //     );
+                // }
+
+                // Function to add tooltips to each region
+                function onEachFeature(feature, layer) {
+                    if (feature.properties && feature.properties.name) {
+                    layer.bindTooltip(feature.properties.name, { sticky: true }); // Show name on hover
+                    }
+                }
+            
+                // Add all regions to the map
+                geoJsonLayer = L.geoJSON({ type: "FeatureCollection", features: allRegions }, {
+                    style: {
+                    color: "black",   // Uniform outline color
+                    weight: 1,        // Uniform border weight
+                    fillColor: 'rgb(209, 219, 221)', // Uniform fill color rgb(209, 219, 221)
+                    fillOpacity: 1    // Fully opaque
+                    },
+                    onEachFeature: onEachFeature // Attach tooltips
+                }).addTo(map);
+
+                // Process any pending messages
+                pendingMessages.forEach(tableData => highlightMapRegions(tableData));
+                pendingMessages = []; // Clear the queue
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error));
+        }
+
+        function highlightMapRegions(tableData) {
+            const greenRegions = new Set();
+            geoJsonLayer.eachLayer(layer => {
+                const regionName = layer.feature.properties.name;
+                const country = layer.feature.properties.country; // Add parent area
+                const isoCode = layer.feature.properties["ISO3166-2"];
+                const regionKeyValue = regionKey(regionName, country); // Combine name and country
+
+                // const regionInTable = tableData.find(item => item.RealRegion === regionName && item.Country === country);
+                const regionInTable = tableData.find(item => {
+                    if (item.RealRegion) {
+                        // Ensure RealRegion is an array
+                        const regions = Array.isArray(item.RealRegion)
+                            ? item.RealRegion // Already parsed
+                            : JSON.parse(item.RealRegion); // Parse if it's a string
+                        return regions.includes(regionName); // Replace targetRegion with the value you're searching for
+                    }
+                });
+                // const regionInTable = tableData.find(item => item.ISO3166_2 === isoCode); // if using ISO codes, but makes POSTing outside of map annoying (must add in all ISO-codes)
+                
+
+                if (regionInTable && (regionInTable.MyName || regionInTable.FirstHad)) {
+                    layer.setStyle({ color: 'black', fillColor: 'green', fillOpacity: 1 });
+                    greenRegions.add(regionKeyValue);
+                    // greenRegions.add(isoCode);
+                } else {
+                    layer.setStyle({ color: 'black', fillColor: 'rgb(209, 219, 221)', fillOpacity: 1 });
+                }
+
+                // Add a click event listener for regions
+                layer.on('click', async () => {
+                    // If the region is not already green (and is either white or light green), turn it green
+                    if (!greenRegions.has(regionKeyValue)) {
+                    // if (!greenRegions.has(isoCode)) {
+                        greenRegions.add(regionKeyValue);
+                        // greenRegions.add(isoCode);
+                        layer.setStyle({ color: 'black', fillColor: 'green', fillOpacity: 1 });
+                        colorRelatedRegions(greenRegions);
+
+
+                        let today = new Date();
+                        // Create JSON object
+                        const requestData = {
+                            myName: regionName,
+                            regionName,
+                            firstHad: today.toISOString().slice(0, 10),
+                            isoCode
+                        };
+                        try {
+                            // Make the POST request
+                            const response = await fetch("/regions", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(requestData), // Convert to JSON string
+                            });
+                            if (response.ok) {
+                                // After a successful POST request, send a message to re-render the table in index.html
+                                window.parent.postMessage({ type: 'RENDER_TABLE' }, '*');
+                            }
+                        } catch (err) {
+                            console.error("Request failed:", err);
+                            // alert("An error occurred while sending the request.");
+                        }
+                    }
+                });
+            });
+            colorRelatedRegions(greenRegions);
+        }
+
+        function colorRelatedRegions(greenRegions) {
+            for (const [group, data] of Object.entries(dependentRegions)) {
+                const { regions, country, isoCodes } = data;
+                // Check if any region in the group is green
+                const groupHasGreen = regions.some(region => greenRegions.has(regionKey(region, country)));
+                // const groupHasGreen = isoCodes.some(isoCode => greenRegions.has(isoCode));
+        
+                if (groupHasGreen) {
+                    geoJsonLayer.eachLayer(layer => {
+                        const regionName = layer.feature.properties.name;
+                        const regionCountry = layer.feature.properties.country;
+                        const isoCode = layer.feature.properties["ISO3166-2"];
+        
+                        // Ensure the region matches both the group and the country
+                        if (
+                            regions.includes(regionName) && 
+                            regionCountry === country &&
+                            !greenRegions.has(regionKey(regionName, regionCountry))
+                            // !greenRegions.has(isoCode)
+                        ) {
+                            layer.setStyle({ color: 'black', fillColor: 'lightgreen', fillOpacity: 1 });
+                        }
+                    });
+                }
+            }
+        }
+
+        // Main function to initialize everything
+        function main() {
+            const map = initializseMap();
+            addTileLayer(map);
+            setupMessageListener();
+            fetchGeoJSON(map);  
+        }
+
+        main();
+           
+    </script>
+</body>
+</html>
