@@ -383,8 +383,6 @@
                     );
 
                     if (matchingRow) {
-                        console.log("WHAT IS MATCHINGROW? ", matchingRow);
-                        console.log("WHAT IS MYROW? ", row);
                         // Update the RealRegion array of the matching row and delete the current row (Step C)
                         await updateRealRegionAndDelete(matchingRow.idRegion, row.RealRegion, id, row.FirstHad < matchingRow.FirstHad ? row.FirstHad : matchingRow.FirstHad);
                         return;
@@ -397,7 +395,6 @@
         }
 
         async function updateRealRegionAndDelete(matchingRowId, realRegionArray, currentRowId, date) {
-            console.log("WHAT IS THIS VALUE? ", realRegionArray);
             try {
                 const response = await fetch(`/regions/merge-and-delete`, {
                     method: 'PATCH',
