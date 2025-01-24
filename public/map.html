@@ -32,6 +32,7 @@
     <script>
         let geoJsonLayer;
         let pendingMessages = [];
+        const greenRegions = new Set(); // Set of all of the regions with values in myRegions
         const regionKey = (name, country) => `${name}, ${country}`;
         const dependentRegions = {
             "Bedfordshire": {
@@ -509,7 +510,7 @@
             // Add more mappings as needed
         };
 
-        function initializseMap() {
+        function initializeMap() {
             // Create a Leaflet map centered on Scotland (adjust coordinates if needed)
             return L.map('map', {
                 center: [53, 15],  
@@ -646,16 +647,19 @@
                 function onEachFeature(feature, layer) {
                     if (feature.properties && feature.properties.name) {
                         layer.bindTooltip(feature.properties.name, { sticky: true }); // Show name on hover
+
+                        // Attach the click listener
+                        setupLayerClick(layer, feature.properties.name, feature.properties.country, feature.properties["ISO3166-2"]);
                     }
                 }
             
                 // Add all regions to the map
                 geoJsonLayer = L.geoJSON({ type: "FeatureCollection", features: allRegions }, {
                     style: {
-                    color: "black",   // Uniform outline color
-                    weight: 1,        // Uniform border weight
-                    fillColor: 'rgb(209, 219, 221)', // Uniform fill color rgb(209, 219, 221)
-                    fillOpacity: 1    // Fully opaque
+                        color: "black",   // Uniform outline color
+                        weight: 1,        // Uniform border weight
+                        fillColor: 'rgb(209, 219, 221)', // Uniform fill color rgb(209, 219, 221)
+                        fillOpacity: 1    // Fully opaque
                     },
                     onEachFeature: onEachFeature // Attach tooltips
                 }).addTo(map);
@@ -667,11 +671,10 @@
             .catch(error => console.error('Error loading GeoJSON:', error));
         }
 
-        function highlightMapRegions(tableData) {
-            const greenRegions = new Set();
+        function highlightMapRegions(tableData) {  
             geoJsonLayer.eachLayer(layer => {
                 const regionName = layer.feature.properties.name;
-                const country = layer.feature.properties.country; // Add parent area
+                const country = layer.feature.properties.country;
                 const isoCode = layer.feature.properties["ISO3166-2"];
                 const regionKeyValue = regionKey(regionName, country); // Combine name and country
 
@@ -685,8 +688,7 @@
                         return regions.includes(regionName); // Replace targetRegion with the value you're searching for
                     }
                 });
-                // const regionInTable = tableData.find(item => item.ISO3166_2 === isoCode); // if using ISO codes, but makes POSTing outside of map annoying (must add in all ISO-codes)
-                
+                // const regionInTable = tableData.find(item => item.ISO3166_2 === isoCode); // if using ISO codes, but makes POSTing outside of map annoying (must add in ISO-codes)
 
                 if (regionInTable && (regionInTable.MyName || regionInTable.FirstHad)) {
                     layer.setStyle({ color: 'black', fillColor: 'green', fillOpacity: 1 });
@@ -694,46 +696,7 @@
                     // greenRegions.add(isoCode);
                 } else {
                     layer.setStyle({ color: 'black', fillColor: 'rgb(209, 219, 221)', fillOpacity: 1 });
-                }
-
-                // Add a click event listener for regions
-                layer.on('click', async () => {
-                    // If the region is not already green (and is either white or light green), turn it green
-                    if (!greenRegions.has(regionKeyValue)) {
-                    // if (!greenRegions.has(isoCode)) {
-                        greenRegions.add(regionKeyValue);
-                        // greenRegions.add(isoCode);
-                        layer.setStyle({ color: 'black', fillColor: 'green', fillOpacity: 1 });
-                        colorRelatedRegions(greenRegions);
-
-
-                        let today = new Date();
-                        // Create JSON object
-                        const requestData = {
-                            myName: regionName,
-                            regionName,
-                            firstHad: today.toISOString().slice(0, 10),
-                            isoCode
-                        };
-                        try {
-                            // Make the POST request
-                            const response = await fetch("/regions", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify(requestData), // Convert to JSON string
-                            });
-                            if (response.ok) {
-                                // After a successful POST request, send a message to re-render the table in index.html
-                                window.parent.postMessage({ type: 'RENDER_TABLE' }, '*');
-                            }
-                        } catch (err) {
-                            console.error("Request failed:", err);
-                            // alert("An error occurred while sending the request.");
-                        }
-                    }
-                });
+                }          
             });
             colorRelatedRegions(greenRegions);
         }
@@ -765,9 +728,52 @@
             }
         }
 
+        function setupLayerClick(layer, regionName, country, isoCode) {
+            const regionKeyValue = regionKey(regionName, country);
+
+            // Add a click event listener for regions
+            layer.on('click', async () => {
+                // If the region is not already green (and is either white or light green), turn it green
+                if (!greenRegions.has(regionKeyValue)) {
+                // if (!greenRegions.has(isoCode)) {
+                    greenRegions.add(regionKeyValue);
+                    // greenRegions.add(isoCode);
+                    layer.setStyle({ color: 'black', fillColor: 'green', fillOpacity: 1 });
+                    colorRelatedRegions(greenRegions);
+
+
+                    let today = new Date();
+                    // Create JSON object
+                    const requestData = {
+                        myName: regionName,
+                        regionName,
+                        firstHad: today.toISOString().slice(0, 10),
+                        isoCode
+                    };
+                    try {
+                        // Make the POST request
+                        const response = await fetch("/regions", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(requestData), // Convert to JSON string
+                        });
+                        if (response.ok) {
+                            // After a successful POST request, send a message to re-render the table in index.html
+                            window.parent.postMessage({ type: 'RENDER_TABLE' }, '*');
+                        }
+                    } catch (err) {
+                        console.error("Request failed:", err);
+                        // alert("An error occurred while sending the request.");
+                    }
+                }
+            });
+        }
+
         // Main function to initialize everything
         function main() {
-            const map = initializseMap();
+            const map = initializeMap();
             addTileLayer(map);
             setupMessageListener();
             fetchGeoJSON(map);  
