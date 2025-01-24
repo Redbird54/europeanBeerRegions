@@ -1,6 +1,7 @@
 const { Request, Response } = require("express");
 const path = require('path');
 const mysql = require('mysql2');
+const fs = require('fs');
 require('dotenv').config();
 
 // MySQL connection setup
@@ -36,13 +37,27 @@ const tokenMiddleware = (req, res, next) => {
     next();
 };
 
-function getData(req, res) {
-    // const authHeader = req.headers.authorization;
+function getGeoJsons(req, res) {
+    const geoJsonDir = path.join(__dirname, '..', 'geojson_data');
     
-    // // Check for the token
-    // if (authHeader !== 'Bearer my-secret-token') {
-    //     return res.status(403).json({ error: 'Access forbidden' });
-    // }
+    fs.readdir(geoJsonDir, (err, files) => {
+        if (err) {
+            console.error('Error reading directory:', err);
+            return res.status(500).json({ error: 'Failed to read directory' });
+        }
+
+        // Filter files to include only .geojson files
+        const geoJsonUrls = files
+            .filter(file => file.endsWith('.geojson'))
+            .map(file => `/geojson_data/${file}`);
+
+        res.json(geoJsonUrls); // Send the array of URLs as JSON
+    });
+}
+
+
+
+function getData(req, res) {
     const sqlQuery = "SELECT EuropeanRegions.Name AS FullName, EuropeanRegions.Country, myRegions.Name AS MyName, DATE_FORMAT(myRegions.FirstHad, '%Y-%m-%d') AS FirstHad, myRegions.idRegion, JSON_EXTRACT(myRegions.RealRegion, '$') AS RealRegion, JSON_EXTRACT(myRegions.ISO3166_2, '$') AS ISO3166_2 FROM myRegions RIGHT JOIN EuropeanRegions ON myRegions.RealRegionID=EuropeanRegions.idEuropeanRegion ORDER BY EuropeanRegions.Country, EuropeanRegions.Name;";
     db.query(sqlQuery, (err, results) => {
         if (err) {
@@ -234,4 +249,4 @@ function mergeAndDelete(req, res) {
 
 
 
-module.exports = { giveToken, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, db };
+module.exports = { giveToken, getGeoJsons, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, db };
