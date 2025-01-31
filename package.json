@@ -2,9 +2,9 @@
   "name": "countryregionsexpress",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node main.js",
+    "start": "node src/app.js",
     "test": "jest"
   },
   "keywords": [],

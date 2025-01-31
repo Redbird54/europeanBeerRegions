@@ -1,0 +1,99 @@
+/* map.html */
+.map-page {
+    height: 100vh; /* 100% of the viewport height */
+    margin: 0;     /* Remove margin */
+    padding: 0;    /* Remove padding */
+}
+
+.map-page html, .map-page body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling */
+}
+.map-page #map {
+    height: 100%; 
+    /* Ensure it fills the container */
+    /* height: 600px; */
+    width: 100%;
+    background-color: white; /* Set map background to white */
+    border: 2px solid black; /* Add a black border around the map */
+    box-sizing: border-box; /* Include the border in the element's total dimensions */
+}
+
+/* .leaflet-container { //seem to be using too much memory for optimization. If from leaflet try using this if problems start
+        will-change: unset;
+    } */
+
+
+
+/* index.html */
+/* Styling for the form elements */
+#addForm {
+    padding-bottom: 20px; /* Adjust the value as needed */
+}
+
+#addForm label,
+#addForm input,
+#addForm select {
+    margin-right: 15px; /* Space between elements */
+}
+
+#addForm {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between each form element */
+}
+
+#addForm button {
+    margin-left: 20px; /* Extra space before the button */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+th:hover {
+    background-color: #ddd;
+}
+
+/* Hide the "Actions" cell by default */
+.action-cell {
+    visibility: hidden; /* The content is invisible */
+    width: 50px; /* The column takes no space */
+    padding: 0; /* Remove padding */
+    border: none; /* No borders */
+}
+
+/* Show the "Actions" cell when the row is hovered */
+tr:hover .action-cell {
+    visibility: visible; /* Make the content visible */
+    width: auto; /* Do not allow the cell to expand */
+    padding-left: 10px; /* Add padding for the button */
+}
+
+/* Style for the delete button */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: red;
+    display: inline-block;
+    padding: 0;
+}
+
+#mapIframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
