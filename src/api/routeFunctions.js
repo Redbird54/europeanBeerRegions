@@ -5,19 +5,24 @@ const fs = require('fs');
 require('dotenv').config();
 
 // MySQL connection setup
-const db = mysql.createConnection({
+const pool = mysql.createPool({
+    connectionLimit: 5,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    waitForConnections: true,
+    queueLimit: 0
 });
 
-db.connect((err) => {
+pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to MySQL:', err);
-        return;
-    }
-    console.log('Connected to MySQL database');
+    } else {
+        console.log('Connected to MySQL database');
+        connection.release();
+    } 
 });
 
 function giveToken(req, res) {
@@ -59,7 +64,7 @@ function getGeoJsons(req, res) {
 
 function getData(req, res) {
     const sqlQuery = "SELECT EuropeanRegions.Name AS FullName, EuropeanRegions.Country, myRegions.Name AS MyName, DATE_FORMAT(myRegions.FirstHad, '%Y-%m-%d') AS FirstHad, myRegions.idRegion, JSON_EXTRACT(myRegions.RealRegion, '$') AS RealRegion, JSON_EXTRACT(myRegions.ISO3166_2, '$') AS ISO3166_2 FROM myRegions RIGHT JOIN EuropeanRegions ON myRegions.RealRegionID=EuropeanRegions.idEuropeanRegion ORDER BY EuropeanRegions.Country, EuropeanRegions.Name;";
-    db.query(sqlQuery, (err, results) => {
+    pool.query(sqlQuery, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query error' });
@@ -74,7 +79,7 @@ function getData(req, res) {
 function getRegionById(req, res) {
     const id = req.params.id; 
     const sqlQuery = "SELECT EuropeanRegions.Name AS FullName, EuropeanRegions.Country, myRegions.Name AS MyName, myRegions.FirstHad FROM myRegions RIGHT JOIN EuropeanRegions ON myRegions.RealRegionID=EuropeanRegions.idEuropeanRegion WHERE EuropeanRegions.idEuropeanRegion = " + id + ";";
-    db.query(sqlQuery, (err, results) => {
+    pool.query(sqlQuery, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query error' });
@@ -87,7 +92,7 @@ function getRegionById(req, res) {
 function getRegionByName(req, res) {
     const name = req.query.name; //query from URL
     const sqlQuery = "SELECT EuropeanRegions.Name AS FullName, EuropeanRegions.Country, myRegions.Name AS MyName, myRegions.FirstHad FROM myRegions RIGHT JOIN EuropeanRegions ON myRegions.RealRegionID=EuropeanRegions.idEuropeanRegion WHERE EuropeanRegions.Name = '" + name + "';";
-    db.query(sqlQuery, (err, results) => {
+    pool.query(sqlQuery, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query error' });
@@ -97,16 +102,11 @@ function getRegionByName(req, res) {
     });
 }
 
-// export async function createRestaurant(req: Request, res: Response) {
-//   const body = req.body as Restaurant;
-//   const restaurant = await repo.add(body);
-//   res.json(restaurant);
-// }
 function addRegion(req, res) { 
     const sqlGetQuery = "SELECT idEuropeanRegion, Country FROM EuropeanRegions WHERE Name = ?;";
     const sqlGetAlternativeQuery = "SELECT idEuropeanRegion, Country FROM EuropeanRegions WHERE JSON_CONTAINS(OtherRegion, JSON_QUOTE(?));";
     // First query: get information about the region
-    db.query(sqlGetQuery, [req.body.regionName], (err, getResults) => {
+    pool.query(sqlGetQuery, [req.body.regionName], (err, getResults) => {
         if (err) {
             console.error("Error executing SELECT query:", err);
             res.status(500).json({ error: "Database query error" });
@@ -118,7 +118,7 @@ function addRegion(req, res) {
         }
 
         else {
-            db.query(sqlGetAlternativeQuery, [req.body.regionName], (err, altResults) => {
+            pool.query(sqlGetAlternativeQuery, [req.body.regionName], (err, altResults) => {
                 if (err) {
                     console.error("Error executing SELECT query for alternative name:", err);
                     res.status(500).json({ error: "Database query error" });
@@ -149,15 +149,15 @@ function processRegion(regionData, req, res) {
         const isoCodeArray = req.body.isoCode instanceof Array ? req.body.isoCode : [req.body.isoCode];
         const regionArray = req.body.regionName instanceof Array ? req.body.regionName : [req.body.regionName];
     const insertValues = [
-        req.body.myName,         // Name
-        Country,                 // Country from first query
-        req.body.firstHad || null, // FirstHad (or NULL if not provided)
-        JSON.stringify(regionArray),            // RealRegion
-        idEuropeanRegion,        // RealRegionID from first query
-        JSON.stringify(isoCodeArray)       // isoCode of the region to match with map  
+        req.body.myName,                // Name
+        Country,                        // Country from first query
+        req.body.firstHad || null,      // FirstHad (or NULL if not provided)
+        JSON.stringify(regionArray),    // RealRegion
+        idEuropeanRegion,               // RealRegionID from first query
+        JSON.stringify(isoCodeArray)    // isoCode of the region to match with map  
     ];
 
-    db.query(sqlInsertQuery, insertValues, (err, insertResults) => {
+    pool.query(sqlInsertQuery, insertValues, (err, insertResults) => {
         if (err) {
             console.error("Error executing INSERT query:", err);
             res.status(500).json({ error: "Database query error" });
@@ -176,7 +176,7 @@ function deleteMyRegionById(req, res) {
     const id = req.params.id;
     const sqlDeleteQuery = "DELETE FROM myRegions WHERE idRegion = ?";
 
-    db.query(sqlDeleteQuery, [id], (err, results) => {
+    pool.query(sqlDeleteQuery, [id], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query error' });
@@ -194,7 +194,7 @@ function editDataById(req, res) {
 
     const sqlUpdateQuery = "UPDATE myRegions SET ?? = ? WHERE idRegion = ?";
 
-    db.query(sqlUpdateQuery, [field, value, id], (err, results) => {
+    pool.query(sqlUpdateQuery, [field, value, id], (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query error' });
@@ -220,7 +220,7 @@ function mergeAndDelete(req, res) {
                 WHERE idRegion = ?
             `;
 
-            db.query(updateQuery, [region, date, matchingRowId], (err, updateResult) => {
+            pool.query(updateQuery, [region, date, matchingRowId], (err, updateResult) => {
                 if (err) {
                     console.error('Error updating RealRegion:', err);
                     return res.status(500).json({ error: 'Failed to update RealRegion' });
@@ -231,7 +231,7 @@ function mergeAndDelete(req, res) {
 
         // Now delete the current row after updating RealRegion
         const deleteQuery = `DELETE FROM myRegions WHERE idRegion = ?`;
-        db.query(deleteQuery, [currentRowId], (err, deleteResult) => {
+        pool.query(deleteQuery, [currentRowId], (err, deleteResult) => {
             if (err) {
                 console.error('Error deleting row:', err);
                 return res.status(500).json({ error: 'Failed to delete row' });
@@ -249,4 +249,4 @@ function mergeAndDelete(req, res) {
 
 
 
-module.exports = { giveToken, getGeoJsons, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, db };
+module.exports = { giveToken, getGeoJsons, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, pool };
