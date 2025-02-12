@@ -1,7 +1,7 @@
 {
 "type": "FeatureCollection",
 "name": "SpainCommunities",
-"source": "https:\/\/public.opendatasoft.com\/explore\/dataset\/georef-spain-comunidad-autonoma\/export\/?disjunctive.acom_code&disjunctive.acom_name",
+"source": "https://public.opendatasoft.com/explore/dataset/georef-spain-comunidad-autonoma/export/?disjunctive.acom_code&disjunctive.acom_name",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "name": "Melilla", "ISO3166-2": "ES-ML", "country": "Spain" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ -2.952638025, 35.320300218109601 ], [ -2.963664446, 35.309656073109721 ], [ -2.970295508, 35.288678492109945 ], [ -2.965246237, 35.28842899810995 ], [ -2.968491225, 35.281963244110017 ], [ -2.954152731, 35.272739741110122 ], [ -2.950542319, 35.265488529110208 ], [ -2.929473163, 35.271804629110129 ], [ -2.92754602, 35.274384869110094 ], [ -2.933225479, 35.276067688110089 ], [ -2.937689648, 35.284206217109997 ], [ -2.93570063, 35.292065539109913 ], [ -2.92944434, 35.292838419109898 ], [ -2.928563376, 35.290613163109931 ], [ -2.92523719, 35.293268709109888 ], [ -2.93472916, 35.295244419109878 ], [ -2.937481996, 35.3022862751098 ], [ -2.94715503, 35.308885069109728 ], [ -2.94537055, 35.315798499109647 ], [ -2.952638025, 35.320300218109601 ] ] ] ] } },
