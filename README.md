@@ -1,4 +1,5 @@
-Run express server by using 'node main.js' or 'npm start'.
-Can run tests using 'npm test'.
+Run express server by using 'npm start'.
 
-Values for connecting to Database (DB\_HOST, DB\_USER, DB\_PASSWORD, DB\_NAME) and tokens (e.g. SECRET_TOKEN) are within .env file.
+Navigate to 'http://localhost:8080/' on a browser to see the result!
+
+Currently the data is automatically filled with my individual data. Different users will be added soon.
