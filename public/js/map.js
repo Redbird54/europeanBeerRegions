@@ -71,7 +71,7 @@ function fetchGeoJSON(map, geoJsonUrls) {
     .catch(error => console.error('Error loading GeoJSON:', error));
 
     // Load preprocessed country boundaries
-    fetch('/geojson/countryOutlines.geojson')
+    fetch('../geojson/countryOutlines.geojson')
     .then(res => res.json())
     .then(data => {
         L.geoJSON(data, {
@@ -168,7 +168,7 @@ function setupLayerClick(layer, regionName, country, isoCode) {
             };
             try {
                 // Make the POST request
-                const response = await fetch("/regions", {
+                const response = await fetch("http://localhost:8080/regions", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -194,7 +194,7 @@ function main() {
     setupMessageListener();
 
     // Fetch the GeoJSON URLs dynamically
-    fetch('/geojson-files')
+    fetch('../geojson-files.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to fetch GeoJSON files');
