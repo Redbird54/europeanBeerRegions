@@ -12,3 +12,9 @@ EXPOSE 3306
 
 # Dummy port to satisfy Render
 EXPOSE 80
+
+# Install a simple HTTP server
+RUN apt-get update && apt-get install -y netcat
+
+# Start a dummy HTTP server in the background
+CMD (while true; do echo -e "HTTP/1.1 200 OK\n\nHello" | nc -l -p 80; done) & docker-entrypoint.sh mysqld
