@@ -13,14 +13,6 @@ RUN npm install --only=production
 # Copy the rest of the backend application code to the container
 COPY . .
 
-# Set environment variables (optional, can also be set on Render dashboard)
-ENV DB_HOST=mysql \
-    DB_USER=${CONTAINER_DB_USER} \
-    DB_PASSWORD=${CONTAINER_DB_USER_PASSWORD} \
-    DB_NAME=${CONTAINER_DB_NAME} \
-    DB_PORT=3306 \
-    SECRET_TOKEN=${SECRET_TOKEN}
-
 # Expose the port your backend will listen on (e.g., 8080)
 EXPOSE 8080
 

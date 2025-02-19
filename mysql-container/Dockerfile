@@ -2,7 +2,7 @@
 FROM mysql:8.0
 
 # Copy initialization SQL script
-COPY ./init/regions_database.sql /docker-entrypoint-initdb.d/regions_database.sql
+COPY ./regions_database.sql /docker-entrypoint-initdb.d/regions_database.sql
 
 # Ensure the script has execution permissions
 RUN chmod +x /docker-entrypoint-initdb.d/regions_database.sql
