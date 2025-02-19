@@ -23,4 +23,4 @@ RUN apt-get update && apt-get install -y curl && \
     rm dockerize-linux-amd64-v0.6.1.tar.gz
 
 # Run the backend server
-CMD ["dockerize", "-wait", "tcp://mysql:3306", "-timeout", "60s", "npm", "start"]
+CMD ["dockerize", "-wait", "tcp://mysql-db:3306", "-timeout", "60s", "npm", "start"]
