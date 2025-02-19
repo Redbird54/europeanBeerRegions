@@ -25,10 +25,6 @@ pool.getConnection((err, connection) => {
     } 
 });
 
-function giveToken(req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
-}
-
 // Middleware to check the token
 const tokenMiddleware = (req, res, next) => {
     const authHeader = req.headers['authorization'];  // Get the Authorization header
@@ -42,26 +38,6 @@ const tokenMiddleware = (req, res, next) => {
     next();
 };
 
-function getGeoJsons(req, res) {
-    const geoJsonDir = path.join(__dirname, '..', '..', 'public', 'geojson', 'regions');
-    
-    fs.readdir(geoJsonDir, (err, files) => {
-        if (err) {
-            console.error('Error reading directory:', err);
-            return res.status(500).json({ error: 'Failed to read directory' });
-        }
-
-        // Filter files to include only .geojson files
-        const geoJsonUrls = files
-            .filter(file => file.endsWith('.geojson'))
-            .map(file => `/geojson/regions/${file}`);
-
-        res.json(geoJsonUrls); // Send the array of URLs as JSON
-    });
-}
-
-
-
 function getData(req, res) {
     const sqlQuery = "SELECT EuropeanRegions.Name AS FullName, EuropeanRegions.Country, myRegions.Name AS MyName, DATE_FORMAT(myRegions.FirstHad, '%Y-%m-%d') AS FirstHad, myRegions.idRegion, JSON_EXTRACT(myRegions.RealRegion, '$') AS RealRegion, JSON_EXTRACT(myRegions.ISO3166_2, '$') AS ISO3166_2 FROM myRegions RIGHT JOIN EuropeanRegions ON myRegions.RealRegionID=EuropeanRegions.idEuropeanRegion ORDER BY EuropeanRegions.Country, EuropeanRegions.Name;";
     pool.query(sqlQuery, (err, results) => {
@@ -73,8 +49,6 @@ function getData(req, res) {
         res.json(results);
     });
 }
-
-// const repo = new RestaurantsRepo(path.join(__dirname, "../data/data.txt"));
 
 function getRegionById(req, res) {
     const id = req.params.id; 
@@ -225,7 +199,6 @@ function mergeAndDelete(req, res) {
                     console.error('Error updating RealRegion:', err);
                     return res.status(500).json({ error: 'Failed to update RealRegion' });
                 }
-                // console.log('RealRegion updated successfully:', updateResult);
             });
         }
 
@@ -236,7 +209,6 @@ function mergeAndDelete(req, res) {
                 console.error('Error deleting row:', err);
                 return res.status(500).json({ error: 'Failed to delete row' });
             }
-            // console.log('Row deleted successfully:', deleteResult);
             res.json({ message: 'Rows merged and deleted successfully' });
         });
 
@@ -249,4 +221,4 @@ function mergeAndDelete(req, res) {
 
 
 
-module.exports = { giveToken, getGeoJsons, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, pool };
+module.exports = { getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, pool };

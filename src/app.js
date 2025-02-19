@@ -1,12 +1,28 @@
 const express = require('express');
 const path = require('path');
 const router = require("./api/routes");
+const cors = require("cors");
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:3000",  // Local testing
+  "https://your-frontend.vercel.app"  // Replace when frontend is deployed
+];
+
 // Serve static files (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use('/geojson', express.static(path.join(__dirname, '..', 'public', 'geojson')));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true
+  }));
 
 // Enable JSON parsing for POST requests
 app.use(express.json());
