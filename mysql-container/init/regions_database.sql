@@ -1,3 +1,6 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 CREATE TABLE `Countries` (
   `idCountry` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(55) NOT NULL,
