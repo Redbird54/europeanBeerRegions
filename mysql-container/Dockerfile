@@ -10,6 +10,9 @@ RUN chmod +x /docker-entrypoint-initdb.d/regions_database.sql
 # Expose MySQL port (3306)
 EXPOSE 3306
 
+# Force MySQL to listen on port 3306
+CMD ["mysqld", "--port=3306", "--bind-address=0.0.0.0"]
+
 # Dummy port to satisfy Render
 EXPOSE 80
 
