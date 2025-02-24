@@ -22,7 +22,12 @@ app.use(cors({
     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: "Content-Type,Authorization",
     credentials: true
-  }));
+}));
+
+const PORT = 8080;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 // Enable JSON parsing for POST requests
 app.use(express.json());

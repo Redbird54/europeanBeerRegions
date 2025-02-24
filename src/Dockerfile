@@ -23,4 +23,7 @@ RUN apt-get update && apt-get install -y curl && \
     rm dockerize-linux-amd64-v0.6.1.tar.gz
 
 # Run the backend server
-CMD ["dockerize", "-wait", "tcp://mysql-db:3306", "-timeout", "120s", "npm", "start"]
+CMD echo "Waiting for MySQL to be ready..." && \
+    dockerize -wait tcp://mysql-db:3306 -timeout 120s && \
+    echo "Database is ready, starting the backend server..." && \
+    npm start
