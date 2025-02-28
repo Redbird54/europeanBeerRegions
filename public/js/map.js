@@ -168,7 +168,7 @@ function setupLayerClick(layer, regionName, country, isoCode) {
             };
             try {
                 // Make the POST request
-                const response = await fetch("http://localhost:8080/regions", {
+                const response = await fetch("http://130.162.226.244:8080/regions", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

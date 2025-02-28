@@ -1,8 +1,8 @@
 # Use the official Node.js image as a base image
-FROM node:16
+FROM node:18
 
 # Set the working directory inside the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
@@ -16,14 +16,8 @@ COPY . .
 # Expose the port your backend will listen on (e.g., 8080)
 EXPOSE 8080
 
-# Wait for database container to be ready before starting backend server
-RUN apt-get update && apt-get install -y curl && \
-    curl -LO https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz && \
-    tar -xvzf dockerize-linux-amd64-v0.6.1.tar.gz -C /usr/local/bin && \
-    rm dockerize-linux-amd64-v0.6.1.tar.gz
+# Set environment variables (use .env instead of hardcoding)
+ENV NODE_ENV=production
 
-# Run the backend server
-CMD echo "Waiting for MySQL to be ready..." && \
-    dockerize -wait tcp://mysql-db:3306 -timeout 120s && \
-    echo "Database is ready, starting the backend server..." && \
-    npm start
+# Start the backend
+CMD ["npm", "start"]
