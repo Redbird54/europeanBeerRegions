@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mysql:
+  mysql-db:
     build: ./mysql-container
     container_name: mysql-db
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
       dockerfile: ./src/Dockerfile
     container_name: backend
     environment:
-      DB_HOST: mysql
+      DB_HOST: mysql-db
       DB_USER: ${CONTAINER_DB_USER}
       DB_PASSWORD: ${CONTAINER_DB_USER_PASSWORD}
       DB_NAME: ${CONTAINER_DB_NAME}
@@ -32,7 +32,7 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      - mysql-db
     networks:
       - backend_network
 
