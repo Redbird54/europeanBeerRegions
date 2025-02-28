@@ -24,11 +24,6 @@ app.use(cors({
     credentials: true
 }));
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
 // Enable JSON parsing for POST requests
 app.use(express.json());
 
@@ -38,7 +33,7 @@ module.exports = app; // Export the app for testing
 
 // Start the server only when running the app directly and not tests
 if (require.main === module) {
-    const PORT = 8080;
+    const PORT = process.env.PORT;
     app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });

@@ -1,7 +1,13 @@
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
-CREATE TABLE `Countries` (
+CREATE USER 'app_user'@'%' IDENTIFIED BY 'u3B9d#8r{Z(B';
+GRANT ALL PRIVILEGES ON region_map_db.* TO 'app_user'@'%';
+FLUSH PRIVILEGES;
+
+USE region_map_db;
+
+CREATE TABLE IF NOT EXISTS `Countries` (
   `idCountry` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(55) NOT NULL,
   `RegionName` varchar(55) DEFAULT NULL,
@@ -212,7 +218,7 @@ INSERT INTO `Countries` (`idCountry`,`Name`,`RegionName`,`RegionCount`) VALUES (
 
 
 
-CREATE TABLE `Territories` (
+CREATE TABLE IF NOT EXISTS `Territories` (
   `idTerritory` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(55) NOT NULL,
   `Type` varchar(55) DEFAULT NULL,
@@ -282,7 +288,7 @@ INSERT INTO `Territories` (`idTerritory`,`Name`,`Type`,`OwnedBy`,`RegionName`,`R
 
 
 
-CREATE TABLE `EuropeanRegions` (
+CREATE TABLE IF NOT EXISTS `EuropeanRegions` (
   `idEuropeanRegion` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(55) NOT NULL,
   `Type` varchar(55) DEFAULT NULL,
@@ -1187,7 +1193,7 @@ INSERT INTO `EuropeanRegions` (`idEuropeanRegion`,`Name`,`Type`,`Country`,`Other
 
 
 
-CREATE TABLE `myRegions` (
+CREATE TABLE IF NOT EXISTS `myRegions` (
   `idRegion` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(100) DEFAULT NULL,
   `Country` varchar(55) NOT NULL,
