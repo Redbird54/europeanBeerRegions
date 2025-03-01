@@ -1,7 +1,16 @@
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
-CREATE USER 'app_user'@'%' IDENTIFIED BY 'u3B9d#8r{Z(B';
+-- Check if the user exists before creating
+SET @user_exists = (SELECT COUNT(*) FROM mysql.user WHERE user = 'app_user' AND host = '%');
+
+-- If user does not exist, create it
+SET @create_user_stmt = IF(@user_exists = 0, 'CREATE USER ''app_user''@''%'' IDENTIFIED BY ''PASSWORD'';', 'SELECT ''User exists, skipping creation.'';');
+PREPARE stmt FROM @create_user_stmt;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- Ensure privileges are granted
 GRANT ALL PRIVILEGES ON region_map_db.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 
