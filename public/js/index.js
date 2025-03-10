@@ -446,7 +446,8 @@ function sendDataToMap(tableData) {
     // Function to send tableData to the iframe
     function sendTableDataToIframe() {
         if (iframe.contentWindow) {
-            iframe.contentWindow.postMessage({ tableData }, 'http://localhost:3000');
+            const targetOrigin = window.location.origin;
+            iframe.contentWindow.postMessage({ tableData }, targetOrigin);
         } else {
             console.error("Iframe contentWindow is not available.");
         }
