@@ -36,7 +36,7 @@ function formListener() {
 async function postFormData(data) {
     try {
         // Make the POST request
-        const response = await fetch(`https://130.162.226.244:443/regions`, {
+        const response = await fetch(`https://mybeermapbackend.duckdns.org/regions`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@ async function postFormData(data) {
         if (response.ok) {
             const result = await response.json();
             // Fetch data from the Express API and populate the table
-            fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
                 .then(response => response.json())
                 .then(data => {
                     tableData = data; // Store the data
@@ -68,7 +68,7 @@ async function postFormData(data) {
 
 function initializeTable() {
     // Fetch data from the Express API and populate the table
-    fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+    fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
         .then(response => response.json())
         .then(data => {
             tableData = data; // Store the data
@@ -102,7 +102,7 @@ function addMessageListener() {
     // Listen for messages from map.html
     window.addEventListener('message', (event) => {
         if (event.data.type === 'RENDER_TABLE') {
-            fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
                 .then(response => response.json())
                 .then(data => {
                     tableData = data; // Store the data
@@ -286,7 +286,7 @@ async function handleUpdate(index, field, id, oldValue, newValue) {
 
 async function updateRealRegionAndDelete(matchingRowId, realRegionArray, currentRowId, date) {
     try {
-        const response = await fetch(`https://130.162.226.244:443/regions/merge-and-delete`, {
+        const response = await fetch(`https://mybeermapbackend.duckdns.org/regions/merge-and-delete`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -303,7 +303,7 @@ async function updateRealRegionAndDelete(matchingRowId, realRegionArray, current
             throw new Error('Failed to merge and delete rows');
         }
 
-        fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+        fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
             .then(response => response.json())
             .then(data => {
                 tableData = data; // Store the data
@@ -383,14 +383,14 @@ async function deleteData(id) {
     // Make the DELETE request
     if (id) {
         try {
-            const response = await fetch(`https://130.162.226.244:443/regions/${id}`, {
+            const response = await fetch(`https://mybeermapbackend.duckdns.org/regions/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
                 throw new Error('Failed to delete the row from the database');
             }
             // const data = await response.json();
-            fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
                 .then(response => response.json())
                 .then(data => {
                     tableData = data; // Store the data
@@ -413,7 +413,7 @@ async function updateData(id, field, newValue) {
     // Make the PATCH request
     if (id) {
         try {
-            const response = await fetch(`https://130.162.226.244:443/regions/${id}`, {
+            const response = await fetch(`https://mybeermapbackend.duckdns.org/regions/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -424,7 +424,7 @@ async function updateData(id, field, newValue) {
                 throw new Error('Failed to update the row from the database');
             }
             // const data = await response.json();
-            fetch(`https://130.162.226.244:443/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
                 .then(response => response.json())
                 .then(data => {
                     tableData = data; // Store the data

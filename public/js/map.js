@@ -168,7 +168,7 @@ function setupLayerClick(layer, regionName, country, isoCode) {
             };
             try {
                 // Make the POST request
-                const response = await fetch("https://130.162.226.244:443/regions", {
+                const response = await fetch(`https://mybeermapbackend.duckdns.org/regions`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
