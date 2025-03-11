@@ -11,7 +11,7 @@ function init() {
 }
 
 function fetchToken() {
-    return fetch('http://mybeermapbackend.duckdns.org/get-token')
+    return fetch('https://mybeermapbackend.duckdns.org/get-token')
       .then(response => response.json())
       .then(data => {
         secretToken = data.token;
