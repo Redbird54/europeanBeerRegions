@@ -1,11 +1,22 @@
 let tableData = [];
-const secretToken = 'my-secret-token'; //temporarily hardcoding token on frontend for now
+let secretToken = null;
 let currentSort = { column: 'Country', direction: 'asc' };
 
 function init() {
-    formListener()
-    initializeTable()
-    addMessageListener()
+    fetchToken().then(() => {
+        formListener();
+        initializeTable();
+        addMessageListener();
+    });
+}
+
+function fetchToken() {
+    return fetch('http://mybeermapbackend.duckdns.org/get-token')
+      .then(response => response.json())
+      .then(data => {
+        secretToken = data.token;
+      })
+      .catch(error => console.error('Error fetching token:', error));
 }
 
 function formListener() {

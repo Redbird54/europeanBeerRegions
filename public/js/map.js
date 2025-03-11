@@ -67,11 +67,8 @@ function fetchGeoJSON(map, geoJsonUrls) {
         // Process any pending messages
         pendingMessages.forEach(tableData => highlightMapRegions(tableData));
         pendingMessages = []; // Clear the queue
+        return fetch(`../geojson/countryOutlines.geojson`);
     })
-    .catch(error => console.error('Error loading GeoJSON:', error));
-
-    // Load preprocessed country boundaries
-    fetch(`../geojson/countryOutlines.geojson`)
     .then(res => res.json())
     .then(data => {
         L.geoJSON(data, {
