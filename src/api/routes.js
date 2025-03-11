@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const {
+    getToken,
     tokenMiddleware,
     getData,
     getRegionById,
@@ -12,6 +13,7 @@ const {
 
 const r = Router();
 
+r.get('/get-token', getToken)
 r.get('/api/data', tokenMiddleware, getData);
 r.get('/regions/:id', getRegionById); //Currently do not have access to id, but we could put new query in?
 r.get('/regions', getRegionByName); //e.g. ?name=London

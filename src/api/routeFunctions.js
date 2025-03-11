@@ -25,6 +25,10 @@ pool.getConnection((err, connection) => {
     } 
 });
 
+function getToken(req, res) {
+    res.json({ token: process.env.SECRET_TOKEN });
+}
+
 // Middleware to check the token
 const tokenMiddleware = (req, res, next) => {
     const authHeader = req.headers['authorization'];  // Get the Authorization header
@@ -221,4 +225,4 @@ function mergeAndDelete(req, res) {
 
 
 
-module.exports = { getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, pool };
+module.exports = { getToken, getData, getRegionById, addRegion, getRegionByName, deleteMyRegionById, editDataById, mergeAndDelete, tokenMiddleware, pool };
