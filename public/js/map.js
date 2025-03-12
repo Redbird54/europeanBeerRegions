@@ -109,6 +109,10 @@ function highlightMapRegions(tableData) {
             // greenRegions.add(isoCode);
         } else {
             layer.setStyle({ color: 'black', fillColor: 'rgb(209, 219, 221)', fillOpacity: 1 });
+            greenRegions.delete(regionKeyValue);
+
+            // Reattach click listener so it can be added again
+            setupLayerClick(layer, regionName, country, isoCode);
         }
     });
     colorRelatedRegions(greenRegions);

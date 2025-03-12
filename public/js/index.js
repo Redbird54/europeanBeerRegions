@@ -17,7 +17,7 @@ function fetchToken() {
         secretToken = data.token;
       })
       .catch(error => console.error('Error fetching token:', error));
-  }
+}
 
 function formListener() {
     const addNewForm = document.getElementById('addForm');
@@ -129,8 +129,6 @@ function addMessageListener() {
 function renderTable(data) {
     const container = document.getElementById('data-container');
     container.innerHTML = ''; // Clear the container
-
-    
 
     // Create a table and append it to the container
     const table = document.createElement('table');
