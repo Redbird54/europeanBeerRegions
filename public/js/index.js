@@ -58,15 +58,7 @@ async function postFormData(data) {
         if (response.ok) {
             const result = await response.json();
             // Fetch data from the Express API and populate the table
-            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
-                .then(response => response.json())
-                .then(data => {
-                    tableData = data; // Store the data
-                    renderTable(tableData); // Render the initial table
-                    sortTable(currentSort.column)
-                    sendDataToMap(tableData);
-                })
-                .catch(error => console.error('Error fetching data:', error));
+            getData(true);
         } else {
             const error = await response.text();
             // alert("Error adding data: " + error);
@@ -113,14 +105,7 @@ function addMessageListener() {
     // Listen for messages from map.html
     window.addEventListener('message', (event) => {
         if (event.data.type === 'RENDER_TABLE') {
-            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
-                .then(response => response.json())
-                .then(data => {
-                    tableData = data; // Store the data
-                    renderTable(tableData);  // This will re-render the table in index.html
-                    sortTable(currentSort.column)
-                })
-                .catch(error => console.error('Error fetching data:', error));
+            getData(false);
         }
     });
 }
@@ -313,16 +298,7 @@ async function updateRealRegionAndDelete(matchingRowId, realRegionArray, current
         if (!response.ok) {
             throw new Error('Failed to merge and delete rows');
         }
-
-        fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
-            .then(response => response.json())
-            .then(data => {
-                tableData = data; // Store the data
-                renderTable(tableData); // Render the initial table
-            })
-            .catch(error => console.error('Error fetching data:', error));
-
-        // fetchUpdatedTable(); // Refresh the table
+        getData(false);
     } catch (error) {
         console.error('Error merging and deleting rows:', error);
     }
@@ -400,16 +376,7 @@ async function deleteData(id) {
             if (!response.ok) {
                 throw new Error('Failed to delete the row from the database');
             }
-            // const data = await response.json();
-            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
-                .then(response => response.json())
-                .then(data => {
-                    tableData = data; // Store the data
-                    renderTable(tableData); // Render the initial table
-                    sendDataToMap(tableData);
-                    sortTable(currentSort.column)
-                })
-                .catch(error => console.error('Error fetching data:', error));
+            getData(true);
         } catch (error) {
             console.error('Error:', error);
             // alert('Failed to delete the row. Please try again.');
@@ -434,15 +401,7 @@ async function updateData(id, field, newValue) {
             if (!response.ok) {
                 throw new Error('Failed to update the row from the database');
             }
-            // const data = await response.json();
-            fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
-                .then(response => response.json())
-                .then(data => {
-                    tableData = data; // Store the data
-                    renderTable(tableData); // Render the initial table
-                    sortTable(currentSort.column)
-                })
-                .catch(error => console.error('Error fetching data:', error));
+            getData(false);
         } catch (error) {
             console.error('Error:', error);
             // alert('Failed to update the row. Please try again.');
@@ -473,6 +432,20 @@ function sendDataToMap(tableData) {
             sendTableDataToIframe();
         });
     }
+}
+
+function getData(sendToTable) {
+    fetch(`https://mybeermapbackend.duckdns.org/api/data`, { method: 'GET', headers: { 'Authorization': `Bearer ${secretToken}` } })
+    .then(response => response.json())
+    .then(data => {
+        tableData = data; // Store the data
+        renderTable(tableData); // Render the initial table
+        sortTable(currentSort.column);
+        if (sendToTable) {
+            sendDataToMap(tableData);
+        }
+    })
+    .catch(error => console.error('Error fetching data:', error));
 }
 
 init();
