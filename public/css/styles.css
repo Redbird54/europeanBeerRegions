@@ -22,33 +22,44 @@
     box-sizing: border-box; /* Include the border in the element's total dimensions */
 }
 
-/* .leaflet-container { //seem to be using too much memory for optimization. If from leaflet try using this if problems start
-        will-change: unset;
-    } */
-
-
-
 /* index.html */
 /* Styling for the form elements */
 #addForm {
-    padding-bottom: 20px; /* Adjust the value as needed */
-}
-
-#addForm label,
-#addForm input,
-#addForm select {
-    margin-right: 15px; /* Space between elements */
-}
-
-#addForm {
     display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
     align-items: center;
-    gap: 15px; /* Space between each form element */
+    max-width: 100%;
+    padding-bottom: 20px;
+}
+
+#addForm label {
+    white-space: nowrap;
 }
 
 #addForm button {
     margin-left: 20px; /* Extra space before the button */
 }
+
+/* Stack form elements on smaller screens */
+@media (max-width: 600px) {  
+    #addForm {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #addForm label,
+    #addForm input,
+    #addForm select,
+    #addForm button {
+        width: 100%;
+    }
+
+    #addForm button {
+        margin-left: 0;
+    }
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
