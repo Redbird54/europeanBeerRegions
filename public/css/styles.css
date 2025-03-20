@@ -46,18 +46,23 @@
 @media (max-width: 600px) {  
     #addForm {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
 
     #addForm label,
     #addForm input,
-    #addForm select,
-    #addForm button {
+    #addForm select {
         width: 100%;
     }
 
+    #firstHad {
+        min-width: 120px; /* Adjust as needed */
+    }
+
     #addForm button {
+        margin-top: 10px;
         margin-left: 0;
+        width: 25%;
     }
 }
 
